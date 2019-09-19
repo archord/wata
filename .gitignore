@@ -1,0 +1,18 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/target/
+/gwac-core/target/
+/gwac-web/target/
+/gwac-backend/target/
+/gwac-web-resources/target/
+/gwac-log/target/
+/gwac-web-backend/target/
+/gwac-classify/target/
+/gwac-log - 副本/target/
+/gwac-root/target/
+/gwac-backend - 副本/target/
+/gwac-trigger/target/
