@@ -270,7 +270,7 @@
 //      var rootUrl = "http://10.0.10.236";
 //      var rootUrl = "http://172.28.8.8";
 // G042_mon_objt_171116T14073_ccdimg.jpg
-      var otImgUrl = rootUrl + "/images/thumbnail/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+      var otImgUrl = rootUrl + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
 //      console.log(otImgUrl + ", " + x + ", " + y);
       console.log("id=" + movId + ", " + fName + ", " + x + ", " + y);
       $("#otCoordinate").html("<a target=\"_blank\" href=\"" + otImgUrl + "\">" + fName.substring(0, 29) + "</a>(" + parseFloat(x).toFixed(2) + ", " + parseFloat(y).toFixed(2) + ")");
@@ -299,8 +299,8 @@
       var rootUrl = $("#gwacRootURL").val();
 //      var rootUrl = "http://10.0.10.236:9995";
       var subImgListUrl = rootUrl + "/getMotSubImageList.action?cropW=400&cropH=400&labelW=0&cmodel=0&motId="+movId;
-      var fullImgUrl = rootUrl + "/images/thumbnail/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
-      var subImgUrl = rootUrl + "/getSubImage.action?imgPath=/images/thumbnail/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
+      var fullImgUrl = rootUrl + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+      var subImgUrl = rootUrl + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
       + "&centerX=" + x + "&centerY=" + y + "&cropW=400&cropH=400&labelW=0";
       console.log(subImgListUrl);
       console.log("id=" + movId + ", " + fName + ", " + x + ", " + y);

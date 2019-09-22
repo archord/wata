@@ -118,6 +118,15 @@ $(function () {
         var x = item.datapoint[0].toFixed(4);
         var y = item.datapoint[1].toFixed(2);
         $("#tooltip").html(item.series.data[item.dataIndex][3]).css({top: item.pageY - 25, left: item.pageX + 10}).fadeIn(200);
+        
+      var fName = item.series.data[item.dataIndex][6];
+      console.log(fName);
+      var fullImgUrl = gwacRootURL + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+      var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
+      + "&centerX=" + x + "&centerY=" + y + "&cropW=400&cropH=400&labelW=0";
+      console.log(fullImgUrl);
+      $("#movObjSubImg").attr("src", subImgUrl);
+      $("#movObjfullImg").attr("href", fullImgUrl);
       } else {
         $("#tooltip").hide();
       }
@@ -142,7 +151,7 @@ $(function () {
     $.each(ccdList, function (i, item) {
        var dateObj = Date.parse(item['date_ut']) / 60000;
        var minute = dateObj - minDateMinute;
-       coorShow.push([minute, item['mag_aper'], item['magerr_aper'], item['date_ut']]);
+       coorShow.push([minute, item['mag_aper'], item['magerr_aper'], item['date_ut'], item['x'], item['y'], item['img_name']]);
 //       coorShow.push([minute, item['mag_aper']]);
     });
 //    console.log(coorShow);

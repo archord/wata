@@ -85,8 +85,8 @@
                             <div style="text-align:center;">
                                 <br/><br/>
                                 <br/><br/>
-                                <a href="<%=request.getContextPath()%>/resource/images/yuntu.jpg">
-                                    <img src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 10px; "/></a>
+                                <a id="movObjfullImg" href="<%=request.getContextPath()%>/resource/images/yuntu.jpg">
+                                    <img id="movObjSubImg" src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 10px; "/></a>
                                     <br/><br/>
                             </div>
                         </div>

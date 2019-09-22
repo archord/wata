@@ -87,7 +87,8 @@ public class GetSubImage extends ActionSupport {
           ImageIO.write(timg, "jpg", baos);
         } else {
           fileName = "GWAC_ccdimg_sub.jpg";
-          BufferedImage im = ImageIO.read(new File("realTimeOtDistribution/GWAC_ccdimg_sub.jpg"));
+	  tImgPath = dataRootDir + "/realTimeOtDistribution/GWAC_ccdimg_sub.jpg";
+          BufferedImage im = ImageIO.read(new File(tImgPath));
           ImageIO.write(im, "jpg", baos);
         }
       } catch (IOException e) {
