@@ -74,9 +74,6 @@
           <div class="col-xs-2 col-sm-2 col-md-1 ">
             <input type="button" value="下载" class="btn btn-primary" id="motDownloadButton"/>
           </div>
-          <div class="col-xs-2 col-sm-2 col-md-1 ">
-            <a href="${pageContext.request.contextPath}/user-logout.action" title="点击注销">注销</a>
-          </div>
         </form>
       </div>
       <div class="row">

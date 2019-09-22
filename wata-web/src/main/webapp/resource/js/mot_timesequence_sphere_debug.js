@@ -5,10 +5,11 @@
     return (typeof thing === 'function') ? (thing.call(ctx)) : thing;
   }
 
-  function Gwac(placeholder, root, url) {
+  function Gwac(placeholder, root, url, curl) {
     this.placeholder = placeholder;
     this.rootUrl = root;
     this.url = root + "/" + url;
+    this.curl = root + "/" + curl;
     this.pingsUrl = this.rootUrl + "/resource/images/pings.png";
   }
 
@@ -48,6 +49,7 @@
     motLineData: {data: {type: "LineString", coordinates: []}, class: "motLine"},
     motPointData: {data: {type: "MultiPoint", coordinates: []}, class: "motPoint", radius: 3},
     ot1Data: {data: {type: "MultiPoint", coordinates: []}, class: "ot1", radius: 1},
+    constellationLines: {data: {}, class: "constellation"},
     ot1: [],
     ot1InitView: [],
     mot1: [],
@@ -60,7 +62,9 @@
     curnode: [],
     parseData: function(reqData) {
       gwac = this;
-      gwac.ot1Obj = eval(reqData.ot1List);
+      if(reqData.ot1List !==null){
+        gwac.ot1Obj = eval(reqData.ot1List);
+      }
       gwac.motObj = eval(reqData.motList);
       gwac.firstFrame = reqData.minNum;
       gwac.lastFrame = reqData.maxNum;
@@ -89,67 +93,31 @@
         });
       });
 
-      $.each(gwac.ot1[0], function(i, item1) {
-        gwac.ot1InitView.push([item1[0], item1[1]]);
-      });
-
-      /**
-       $.each(gwac.motObj, function(i, item1) {
-       if (item1.mov_type === '1') {
-       gwac.mot1.push(item1);
-       } else if (item1.mov_type === '2') {
-       gwac.mot2.push(item1);
-       } else if (item1.mov_type === '3') {
-       gwac.mot3.push(item1);
-       } else {
-       gwac.mot4.push(item1);
-       }
-       });
-       **/
-
-      //将第3类移动目标按照帧编号进行组织
-      /**
-       $.each(gwac.mot3, function(i, item) {
-       item["frameList"] = [];
-       var mot3Idx = 0;
-       $.each(item.mov_detail, function(j, item1) {
-       if (j === 0) {
-       item.frameList.push({"ff_number": item1.ff_number, "objList": []});
-       item.frameList[mot3Idx].objList.push(item1);
-       } else {
-       if (item.frameList[mot3Idx].ff_number !== item1.ff_number) {
-       item.frameList.push({"ff_number": item1.ff_number, "objList": []});
-       mot3Idx++;
-       item.frameList[mot3Idx].objList.push(item1);
-       } else {
-       item.frameList[mot3Idx].objList.push(item1);
-       }
-       }
-       });
-       });
-       **/
+//      $.each(gwac.ot1[0], function(i, item1) {
+//        gwac.ot1InitView.push([item1[0], item1[1]]);
+//      });
 
       $.each(gwac.motObj, function(i, item) {
         var tcolor1 = 50;
         var tcolor2 = 200;
-        if (item.tt_frm_num > 1) {
-          var r = Math.random() * 255;
-          var g = Math.random() * 255;
-          var b = Math.random() * 255;
-          while ((r < tcolor1 && g < tcolor1 && b < tcolor1) || (r > tcolor2 && g > tcolor2 && b > tcolor2)) {
-            r = Math.random() * 255;
-            g = Math.random() * 255;
-            b = Math.random() * 255;
-          }
-          item.color = d3.rgb(r, g, b);
-          item.fillColor = item.color;
-        } else {
-          item.color = d3.rgb(255, 255, 255);
-          item.fillColor = item.color;
+        var r = Math.random() * 255;
+        var g = Math.random() * 255;
+        var b = Math.random() * 255;
+        while ((r < tcolor1 && g < tcolor1 && b < tcolor1) || (r > tcolor2 && g > tcolor2 && b > tcolor2)) {
+          r = Math.random() * 255;
+          g = Math.random() * 255;
+          b = Math.random() * 255;
         }
+        item.color = d3.rgb(r, g, b);
+        item.fillColor = item.color;
         item.mov_detail.sort(function(a, b) {
           return (a['ff_number'] > b['ff_number']) ? 1 : ((a['ff_number'] < b['ff_number']) ? -1 : 0);
         });
+        if(i===0){
+          $.each(item.mov_detail, function(i, item2) {
+            gwac.ot1InitView.push([item2['ra_d'], item2['dec_d']]);
+          });
+        }
       });
       this.genLabelPoint();
     },
@@ -224,6 +192,7 @@
                 svg.append("path").datum(gwac.sphere.data).attr("class", gwac.sphere.class).attr("d", path);
                 svg.append("path").datum(gwac.equator.data).attr("class", gwac.equator.class).attr("d", path);
                 svg.append("path").datum(gwac.primemeridian.data).attr("class", gwac.primemeridian.class).attr("d", path);
+                svg.append("path").datum(gwac.constellationLines.data).attr("class", gwac.constellationLines.class).attr("d", path);
 //                svg.append("path").datum(gwac.singleLineStringExample.data).attr("class", gwac.primemeridian.class).attr("d", path);
 
                 $.each(gwac.labelPoint.data.coordinates, function(i, item) {
@@ -246,8 +215,6 @@
       var gwac = this;
       if (gwac.motObj.length > 0 && gwac.movType !== '5') {
         $.each(gwac.motObj, function(i, item1) {
-          var mvType = parseInt(item1.mov_type);
-          if (item1.tt_frm_num >= gwac.miniFrameNumber && (gwac.movType === 0 || gwac.movType === mvType)) {
             $.each(item1.mov_detail, function(j, item2) {
               if (item2.ff_number <= gwac.currentFrame && item2.ff_number >= gwac.startFrame) {
                 gwac.motPointData.data.coordinates = [[item2.ra_d, item2.dec_d]];
@@ -263,7 +230,6 @@
                 tnode.on("click", gwac.clickStar);
               }
             });
-          }
         });
       }
     },
@@ -464,11 +430,18 @@
       console.log("startFrame:" + gwac.startFrame);
       console.log("currentFrame:" + gwac.currentFrame);
       console.log("totalFrame:" + gwac.totalFrame);
+    },
+    getConstellations: function() {
+      gwac = this;
+      console.log(gwac.curl);
+      d3.json(gwac.curl, function(errors, reqData) {
+        gwac.constellationLines.data = reqData;
+      });
     }
   };
 
-  $.gwac = function(placeholder, root, url) {
-    var gwac = new Gwac(placeholder, root, url);
+  $.gwac = function(placeholder, root, url, curl) {
+    var gwac = new Gwac(placeholder, root, url, curl);
     return gwac;
   };
 

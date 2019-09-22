@@ -15,6 +15,8 @@ import java.util.Map;
  */
 public interface MoveObjectDao extends BaseHibernateDao<MoveObject> {
   
+  public Map<Long, String> getMoveObjsInfoByDate(String dateStr);
+  
   public List<MoveObject> getMovObjs(String dateStr, int camId);
   
   public MoveObject getMovObj(String dateStr, int todayMovId);

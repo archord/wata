@@ -19,11 +19,13 @@
       $(function() {
         var root = "${pageContext.request.contextPath}";
         var url = "get-mov-ot-sequence-list.action?dateStr=";
+        var curl = "resource/celestial-d3/data/constellations.lines.json";
         var mainHeight = $("#main").height();
         var headerHeight = $("#header").height();
         $("#sphereDisplay").height(mainHeight - headerHeight - 10);
 
-        var gwac = $.gwac("#sphereDisplay", root, url);
+        var gwac = $.gwac("#sphereDisplay", root, url, curl);
+        gwac.getConstellations();
         gwac.loadSkyList();
         gwac.loadDpmList();
         gwac.loadDateStrList();
@@ -76,8 +78,7 @@
             d3.json(movUrl, function(errors, reqData) {
               var motList = reqData.motList;
               var ot1List = reqData.ot1List;
-              if (typeof (motList) !== "undefined" && motList !== null && motList !== ""
-                      && typeof (ot1List) !== "undefined" && ot1List !== null && ot1List !== "") {
+              if (typeof (motList) !== "undefined" && motList !== null && motList !== "") { //&& typeof (ot1List) !== "undefined" && ot1List !== null && ot1List !== ""
                 gwac.parseData(reqData);
                 gwac.draw();
                 setTimeout(function() {
@@ -218,6 +219,7 @@
       .motLine3{stroke-width: 0.5px;}
       .motPoint{stroke-width: 1px;}
       .motPoint:hover{stroke-width: 2px;stroke: red;}
+      .constellation{stroke: #888888;stroke-width: 0.5px;}
 
       img.shiftzoom { visibility: hidden; }
 

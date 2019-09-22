@@ -30,9 +30,10 @@
         <nav id="slide-menu">
             <ul>
                 <li><a href="<%=request.getContextPath()%>/monitor/pctl-telescope-monitor.action">系统控制</a></li>
-                <li><a href="gwac/pgwac-allot.action">观测计划</a></li>
-                <li><a href="<%=request.getContextPath()%>/monitor/pgwac-parm-monitor.action" target="_blank">目标列表</a></li>
-                <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-timesequence-sphere-realtime.action" target="_blank">目标动态展示</a></li>
+                <li><a href="<%=request.getContextPath()%>/control/pctl-observation-plan.action" target="_blank">观测计划</a></li>
+                <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-download.action" target="_blank">目标下载</a></li>
+                <li><a href="<%=request.getContextPath()%>/monitor/pgwac-parm-monitor.action" target="_blank">目标查看</a></li>
+                <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-timesequence-sphere-debug.action" target="_blank">目标3D展示</a></li>
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-ccd-image-realtime.action" target="_blank">图像预览</a></li>
                 <li><a href="<%=request.getContextPath()%>/user-logout.action" target="_blank">退出</a></li>
             </ul>

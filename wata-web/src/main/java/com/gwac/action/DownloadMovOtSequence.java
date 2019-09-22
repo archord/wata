@@ -68,7 +68,7 @@ public class DownloadMovOtSequence extends ActionSupport {
       String dataRootDir = getText("gwacDataRootDirectory");
       fileName = dateStr + ".zip";
 
-      Map<Long, String> movObjs = movObjDao.getMoveObjsInfoByDate(dateStr, moveType, minFrameNumber);
+      Map<Long, String> movObjs = movObjDao.getMoveObjsInfoByDate(dateStr);
 
       try {
         if (!movObjs.isEmpty()) {
