@@ -3,7 +3,12 @@ $(function () {
   var gwacRootURL = $("#gwacRootURL").val();
   var parmUrl = gwacRootURL + "/get-parm-list-json.action";
 
-
+  var coorShow = [];
+  var showImageIdx = 0;
+  var totalImage = 1;
+  var playSpeed = 500;
+  var imgShowInterval;
+  
   var otCurve;
   var plotOption = {
     legend: {show: false},
@@ -26,6 +31,22 @@ $(function () {
   $('#obsDate').change(clearSelectCamera);
   $('#ccdList').change(changeCCDs);
   $('#objList').change(loadObjectRecords);
+  
+  function showImage(){
+    var item = coorShow[showImageIdx];
+    var fName = item[6];
+    var x1 = item[4];
+    var y1 = item[5];
+    //console.log(fName);
+    var fullImgUrl = gwacRootURL + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+    var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
+    + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
+    //console.log(fullImgUrl);
+    $("#movObjSubImg").attr("src", subImgUrl);
+    $("#movObjfullImg").attr("href", fullImgUrl);
+    showImageIdx = showImageIdx+1;
+    showImageIdx=showImageIdx%totalImage;
+  }
 
   function clearSelectCamera() {
     $("#ccdList option:selected").prop("selected", false);
@@ -115,16 +136,19 @@ $(function () {
 
     $("#star-light-curve").bind("plothover", function (event, pos, item) {
       if (item) {
+        clearInterval(imgShowInterval);
         var x = item.datapoint[0].toFixed(4);
         var y = item.datapoint[1].toFixed(2);
         $("#tooltip").html(item.series.data[item.dataIndex][3]).css({top: item.pageY - 25, left: item.pageX + 10}).fadeIn(200);
         
       var fName = item.series.data[item.dataIndex][6];
-      console.log(fName);
+      var x1 = item.series.data[item.dataIndex][4];
+      var y1 = item.series.data[item.dataIndex][5];
+//      console.log(fName);
       var fullImgUrl = gwacRootURL + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
       var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
-      + "&centerX=" + x + "&centerY=" + y + "&cropW=400&cropH=400&labelW=0";
-      console.log(fullImgUrl);
+      + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
+//      console.log(fullImgUrl);
       $("#movObjSubImg").attr("src", subImgUrl);
       $("#movObjfullImg").attr("href", fullImgUrl);
       } else {
@@ -134,10 +158,10 @@ $(function () {
   }
 
   function starCurveShow(data) {
-    console.log(data[0]);
+//    console.log(data[0]);
     var minDate = data[0]['date_ut'];
     var minDateMinute = Date.parse(minDate) / 60000;
-    console.log(minDate);
+//    console.log(minDate);
 
     $('#startDay').html(minDate);
 
@@ -147,7 +171,7 @@ $(function () {
       ccdList = [];
     }
     
-    var coorShow = [];
+    coorShow = [];
     $.each(ccdList, function (i, item) {
        var dateObj = Date.parse(item['date_ut']) / 60000;
        var minute = dateObj - minDateMinute;
@@ -165,6 +189,8 @@ $(function () {
     otCurve = $.plot("#star-light-curve", [aa], plotOption);
     //otCurve.setData(showCCDs);
 //    otCurve.draw();
+    totalImage = coorShow.length;
+    imgShowInterval = setInterval(showImage, playSpeed);
   }
 
 
