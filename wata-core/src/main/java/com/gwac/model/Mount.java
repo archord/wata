@@ -18,66 +18,6 @@ import javax.persistence.Table;
 )
 public class Mount implements java.io.Serializable {
 
-  /**
-   * @return the timeUtc
-   */
-  @Column(name = "time_utc")
-  public Date getTimeUtc() {
-    return timeUtc;
-  }
-
-  /**
-   * @param timeUtc the timeUtc to set
-   */
-  public void setTimeUtc(Date timeUtc) {
-    this.timeUtc = timeUtc;
-  }
-
-  /**
-   * @return the errcode
-   */
-  @Column(name = "errcode")
-  public Short getErrcode() {
-    return errcode;
-  }
-
-  /**
-   * @param errcode the errcode to set
-   */
-  public void setErrcode(Short errcode) {
-    this.errcode = errcode;
-  }
-
-  /**
-   * @return the objRa
-   */
-  @Column(name = "obj_ra")
-  public Float getObjRa() {
-    return objRa;
-  }
-
-  /**
-   * @param objRa the objRa to set
-   */
-  public void setObjRa(Float objRa) {
-    this.objRa = objRa;
-  }
-
-  /**
-   * @return the objDec
-   */
-  @Column(name = "obj_dec")
-  public Float getObjDec() {
-    return objDec;
-  }
-
-  /**
-   * @param objDec the objDec to set
-   */
-  public void setObjDec(Float objDec) {
-    this.objDec = objDec;
-  }
-
   private int mountId;
   private String name;
   private String unitId;
@@ -86,13 +26,17 @@ public class Mount implements java.io.Serializable {
   private String comment;
   private Long opSn;
   private String skyName;
-  private Float ra;
-  private Float dec;
+  private Double ra;
+  private Double dec;
   private String obsType;
   private Date timeUtc;
-  private Short errcode;
-  private Float objRa;
-  private Float objDec;
+  private Integer errcode;
+  private Double objRa;
+  private Double objDec;
+  private Integer state;
+  private Integer linked;
+  private Double azi;
+  private Double alt;
 
   public Mount() {
   }
@@ -216,14 +160,14 @@ public class Mount implements java.io.Serializable {
    * @return the ra
    */
   @Column(name = "ra")
-  public Float getRa() {
+  public Double getRa() {
     return ra;
   }
 
   /**
    * @param ra the ra to set
    */
-  public void setRa(Float ra) {
+  public void setRa(Double ra) {
     this.ra = ra;
   }
 
@@ -231,14 +175,14 @@ public class Mount implements java.io.Serializable {
    * @return the dec
    */
   @Column(name = "dec")
-  public Float getDec() {
+  public Double getDec() {
     return dec;
   }
 
   /**
    * @param dec the dec to set
    */
-  public void setDec(Float dec) {
+  public void setDec(Double dec) {
     this.dec = dec;
   }
 
@@ -255,6 +199,126 @@ public class Mount implements java.io.Serializable {
    */
   public void setObsType(String obsType) {
     this.obsType = obsType;
+  }
+
+  /**
+   * @return the timeUtc
+   */
+  @Column(name = "time_utc")
+  public Date getTimeUtc() {
+    return timeUtc;
+  }
+
+  /**
+   * @param timeUtc the timeUtc to set
+   */
+  public void setTimeUtc(Date timeUtc) {
+    this.timeUtc = timeUtc;
+  }
+
+  /**
+   * @return the errcode
+   */
+  @Column(name = "errcode")
+  public Integer getErrcode() {
+    return errcode;
+  }
+
+  /**
+   * @param errcode the errcode to set
+   */
+  public void setErrcode(Integer errcode) {
+    this.errcode = errcode;
+  }
+
+  /**
+   * @return the objRa
+   */
+  @Column(name = "obj_ra")
+  public Double getObjRa() {
+    return objRa;
+  }
+
+  /**
+   * @param objRa the objRa to set
+   */
+  public void setObjRa(Double objRa) {
+    this.objRa = objRa;
+  }
+
+  /**
+   * @return the objDec
+   */
+  @Column(name = "obj_dec")
+  public Double getObjDec() {
+    return objDec;
+  }
+
+  /**
+   * @param objDec the objDec to set
+   */
+  public void setObjDec(Double objDec) {
+    this.objDec = objDec;
+  }
+
+  /**
+   * @return the state
+   */
+  @Column(name = "state")
+  public Integer getState() {
+    return state;
+  }
+
+  /**
+   * @param state the state to set
+   */
+  public void setState(Integer state) {
+    this.state = state;
+  }
+
+  /**
+   * @return the linked
+   */
+  @Column(name = "linked")
+  public Integer getLinked() {
+    return linked;
+  }
+
+  /**
+   * @param linked the linked to set
+   */
+  public void setLinked(Integer linked) {
+    this.linked = linked;
+  }
+
+  /**
+   * @return the azi
+   */
+  @Column(name = "azi")
+  public Double getAzi() {
+    return azi;
+  }
+
+  /**
+   * @param azi the azi to set
+   */
+  public void setAzi(Double azi) {
+    this.azi = azi;
+  }
+
+  /**
+   * @return the alt
+   */
+  @Column(name = "alt")
+  public Double getAlt() {
+    return alt;
+  }
+
+  /**
+   * @param alt the alt to set
+   */
+  public void setAlt(Double alt) {
+    this.alt = alt;
   }
 
 }

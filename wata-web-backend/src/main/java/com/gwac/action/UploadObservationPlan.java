@@ -9,7 +9,6 @@ package com.gwac.action;
  * @author xy
  */
 import com.gwac.dao.ObservationPlanDao;
-import com.gwac.dao.SystemStatusMonitorDao;
 import com.gwac.model.ObservationPlan;
 import com.gwac.util.CommonFunction;
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,16 +27,16 @@ import org.apache.struts2.convention.annotation.Action;
  *
  * @author xy
  */
-public class ObservationPlanUpload extends ActionSupport {
+public class UploadObservationPlan extends ActionSupport {
 
-  private static final Log log = LogFactory.getLog(ObservationPlanUpload.class);
-  private static final String dateFormateString1 = "yyyy-MM-dd HH:mm:ss.SSS";
-  private static final String dateFormateString2 = "yyyy-MM-dd HH:mm:ss";
+  private static final Log log = LogFactory.getLog(UploadObservationPlan.class);
+//  private static final String dateFormateString1 = "yyyy-MM-dd HH:mm:ss.SSS";
+//  private static final String dateFormateString2 = "yyyy-MM-dd HH:mm:ss";
+  private static final String dateFormateString1 = "yyyyMMdd HHmmssSSS";
+  private static final String dateFormateString2 = "yyyyMMdd HHmmss";
 
   @Resource
   private ObservationPlanDao obsPlanDao;
-  @Resource
-  private SystemStatusMonitorDao ssmDao;
 
   private String opSn;
   private String opTime;
@@ -65,7 +64,7 @@ public class ObservationPlanUpload extends ActionSupport {
   private String pairId;
   private String echo = "";
 
-  @Action(value = "observationPlanUpload")
+  @Action(value = "uploadObservationPlan")
   public void upload() {
 
     echo = "";
@@ -157,14 +156,17 @@ public class ObservationPlanUpload extends ActionSupport {
       }
       obsPlan.setOpTime(tdate);
     }
-    //必须设置传输机器名称
-    if (!obsPlan.checkValid() || opTime == null) {
-      echo = echo + "Error, observationPlan is inValid.\n";
-    } else {
-      obsPlanDao.save(obsPlan);
-      echo = "upload observation success!";
+    
+    if (null != opSn && !opSn.isEmpty()) {
+      if(obsPlanDao.exist(opSn)){
+	echo = "observation plan id="+opSn+" already exist, skip!";
+      }else{
+	obsPlanDao.save(obsPlan);
+	echo = "upload observation success!";
+      }
+    }else{
+      echo = "error: observation plan id is empty!";
     }
-    ssmDao.updateObservationPlan(unitId, Long.parseLong(opSn));
     log.debug(echo);
     sendResultMsg(echo);
   }

@@ -95,5 +95,20 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
     }
     return tobsPlan;
   }
+  
+
+  @Override
+  public Boolean exist(String opSn) {
+
+    String sql = "select * from observation_plan where op_sn=" + opSn;
+
+    Query q = this.getCurrentSession().createSQLQuery(sql).addEntity(ObservationPlan.class);
+    
+    Boolean rst = false;
+    if(q.list().size()>0){
+      rst = true;
+    }
+    return rst;
+  }
 
 }

@@ -23,4 +23,6 @@ public interface ObservationPlanDao extends BaseHibernateDao<ObservationPlan> {
   public List<String> getFieldId(String dateStr, String unitId);
   
   public ObservationPlan getLatestObservationPlanByFieldId(String unitId, String fieldId);
+  
+  public Boolean exist(String opSn);
 }

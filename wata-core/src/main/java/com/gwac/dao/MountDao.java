@@ -5,15 +5,14 @@
 package com.gwac.dao;
 
 import com.gwac.model.Mount;
-import java.util.List;
+import com.gwac.model.MountState;
 
 /**
  *
  * @author xy
  */
 public interface MountDao extends BaseHibernateDao<Mount> {
-  public void updateStatus(String mounts, String status);
-  public String getMountsStatus();
-  public List<Mount> getAll();
+  public void updateMountStatus(MountState obj);
+  public void updateLinked(String groupId, String unitId, Integer linked);
   public Mount getByGroupUnitId(String groupId, String unitId);
 }

@@ -36,18 +36,16 @@ public class CameraMonitor implements Serializable {
   @Column(name = "time_utc")
   @Temporal(TemporalType.DATE)
   private Date timeUtc;
-  @Column(name = "mc_state")
-  private Character mcState;
+  @Column(name = "state")
+  private Integer state;
   @Column(name = "focus")
   private Integer focus;
   @Column(name = "coolget")
   private Float coolget;
   @Column(name = "filter")
   private String filter;
-  @Column(name = "cam_state")
-  private Character camState;
   @Column(name = "errcode")
-  private Short errcode;
+  private Integer errcode;
   @Column(name = "img_type")
   private String imgType;
   @Column(name = "obj_name")
@@ -82,12 +80,12 @@ public class CameraMonitor implements Serializable {
     this.timeUtc = timeUtc;
   }
 
-  public Character getMcState() {
-    return mcState;
+  public Integer getState() {
+    return state;
   }
 
-  public void setMcState(Character mcState) {
-    this.mcState = mcState;
+  public void setState(Integer State) {
+    this.state = State;
   }
 
   public Integer getFocus() {
@@ -114,19 +112,11 @@ public class CameraMonitor implements Serializable {
     this.filter = filter;
   }
 
-  public Character getCamState() {
-    return camState;
-  }
-
-  public void setCamState(Character camState) {
-    this.camState = camState;
-  }
-
-  public Short getErrcode() {
+  public Integer getErrcode() {
     return errcode;
   }
 
-  public void setErrcode(Short errcode) {
+  public void setErrcode(Integer errcode) {
     this.errcode = errcode;
   }
 

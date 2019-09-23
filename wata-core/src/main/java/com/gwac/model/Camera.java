@@ -21,29 +21,37 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "camera", schema = "public"
 )
 public class Camera implements java.io.Serializable {
-
-  private Integer curSkyId;
-  private Short mcState;
-  private Integer focus;
-  private Float coolget;
-  private String filter;
-  private Character camState;
-  private Short errcode;
-  private String imgType;
-  private String objName;
-  private Integer frmNo;
-  private String fileName;
-
   private int cameraId;
   private String name;
   private Integer mountId;
   private Integer curProcessNumber;
   private Date monitorImageTime;
   private Date lastActiveTime;
+  private Integer curSkyId;
   private Integer firstRecordNumber;
   private Integer status;
   private String comment;
   private String cameraType;
+  
+  private Integer coverStatus;
+  private Integer focus;
+  private Float coolget;
+  private String filter;
+  private Integer errcode;
+  private String imgType;
+  private String objName;
+  private Integer frmNo;
+  private String fileName;
+  
+  private Integer linked;
+  private Integer coverLinked;
+  private Date cameraUtc;
+  private Date cameraCoverUtc;
+  private Integer cameraCoverErrcode;
+  
+  private String gid;
+  private String uid;
+  private String cid;
 
   public Camera() {
   }
@@ -182,15 +190,6 @@ public class Camera implements java.io.Serializable {
     this.curSkyId = curSkyId;
   }
 
-  @Column(name = "mc_state")
-  public Short getMcState() {
-    return mcState;
-  }
-
-  public void setMcState(Short mcState) {
-    this.mcState = mcState;
-  }
-
   @Column(name = "focus")
   public Integer getFocus() {
     return focus;
@@ -216,24 +215,6 @@ public class Camera implements java.io.Serializable {
 
   public void setFilter(String filter) {
     this.filter = filter;
-  }
-
-  @Column(name = "cam_state")
-  public Character getCamState() {
-    return camState;
-  }
-
-  public void setCamState(Character camState) {
-    this.camState = camState;
-  }
-
-  @Column(name = "errcode")
-  public Short getErrcode() {
-    return errcode;
-  }
-
-  public void setErrcode(Short errcode) {
-    this.errcode = errcode;
   }
 
   @Column(name = "img_type")
@@ -270,6 +251,157 @@ public class Camera implements java.io.Serializable {
 
   public void setFileName(String fileName) {
     this.fileName = fileName;
+  }
+
+  /**
+   * @return the coverStatus
+   */
+  @Column(name = "cover_status")
+  public Integer getCoverStatus() {
+    return coverStatus;
+  }
+
+  /**
+   * @param coverStatus the coverStatus to set
+   */
+  public void setCoverStatus(Integer coverStatus) {
+    this.coverStatus = coverStatus;
+  }
+
+  /**
+   * @return the errcode
+   */
+  @Column(name = "errcode")
+  public Integer getErrcode() {
+    return errcode;
+  }
+
+  /**
+   * @param errcode the errcode to set
+   */
+  public void setErrcode(Integer errcode) {
+    this.errcode = errcode;
+  }
+
+  /**
+   * @return the linked
+   */
+  @Column(name = "linked")
+  public Integer getLinked() {
+    return linked;
+  }
+
+  /**
+   * @param linked the linked to set
+   */
+  public void setLinked(Integer linked) {
+    this.linked = linked;
+  }
+
+  /**
+   * @return the coverLinked
+   */
+  @Column(name = "cover_linked")
+  public Integer getCoverLinked() {
+    return coverLinked;
+  }
+
+  /**
+   * @param coverLinked the coverLinked to set
+   */
+  public void setCoverLinked(Integer coverLinked) {
+    this.coverLinked = coverLinked;
+  }
+
+  /**
+   * @return the cameraUtc
+   */
+  @Column(name = "camera_utc")
+  public Date getCameraUtc() {
+    return cameraUtc;
+  }
+
+  /**
+   * @param cameraUtc the cameraUtc to set
+   */
+  public void setCameraUtc(Date cameraUtc) {
+    this.cameraUtc = cameraUtc;
+  }
+
+  /**
+   * @return the cameraCoverUtc
+   */
+  @Column(name = "camera_cover_utc")
+  public Date getCameraCoverUtc() {
+    return cameraCoverUtc;
+  }
+
+  /**
+   * @param cameraCoverUtc the cameraCoverUtc to set
+   */
+  public void setCameraCoverUtc(Date cameraCoverUtc) {
+    this.cameraCoverUtc = cameraCoverUtc;
+  }
+
+  /**
+   * @return the cameraCoverErrcode
+   */
+  @Column(name = "camera_cover_errcode")
+  public Integer getCameraCoverErrcode() {
+    return cameraCoverErrcode;
+  }
+
+  /**
+   * @param cameraCoverErrcode the cameraCoverErrcode to set
+   */
+  public void setCameraCoverErrcode(Integer cameraCoverErrcode) {
+    this.cameraCoverErrcode = cameraCoverErrcode;
+  }
+
+
+  /**
+   * @return the gid
+   */
+  @Column(name = "gid")
+  public String getGid() {
+    return gid;
+  }
+
+  /**
+   * @param gid the gid to set
+   */
+  public void setGid(String gid) {
+    this.gid = gid;
+  }
+
+  /**
+   * @return the uid
+   */
+  @Column(name = "uid")
+  public String getUid() {
+    return uid;
+  }
+
+  /**
+   * @param uid the uid to set
+   */
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
+
+  /**
+   * @return the cid
+   */
+  @Column(name = "cid")
+  public String getCid() {
+    return cid;
+  }
+
+  /**
+   * @param cid the cid to set
+   */
+  public void setCid(String cid) {
+    this.cid = cid;
   }
 
 }
