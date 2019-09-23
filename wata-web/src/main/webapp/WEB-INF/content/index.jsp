@@ -29,7 +29,7 @@
         <!-- Navigation -->
         <nav id="slide-menu">
             <ul>
-                <li><a href="<%=request.getContextPath()%>/monitor/pctl-telescope-monitor.action">系统控制</a></li>
+                <!--<li><a href="<%=request.getContextPath()%>/monitor/pctl-telescope-monitor.action">系统控制</a></li>-->
                 <li><a href="<%=request.getContextPath()%>/control/pctl-observation-plan.action" target="_blank">观测计划</a></li>
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-download.action" target="_blank">目标下载</a></li>
                 <li><a href="<%=request.getContextPath()%>/monitor/pgwac-parm-monitor.action" target="_blank">目标查看</a></li>
@@ -59,46 +59,33 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-5 ">
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2>雨量</h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:#0e0">正常</h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2>风速</h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:#0e0">正常</h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2>圆顶</h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:#0e0">正常</h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2>转台</h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:#0e0">正常</h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2>相机</h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:red">异常</h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:red">温控异常</h2></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2>镜盖</h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2 style="color:#0e0">正常</h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2><input type="button" value="开始观测" class="btn btn-primary" id="startBtn" style="font-size: 30px"/></h2></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h2><input type="button" value="停止观测" class="btn btn-primary" id="stopBtn" style="font-size: 30px"/></h2></div>
-                                <div class="col-xs-2 col-sm-2 col-md-2 "></div>
                             </div>
                         </div>
                     </div>

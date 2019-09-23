@@ -37,7 +37,7 @@ public class GetSystemInitStatus extends ActionSupport {
   })
   @SuppressWarnings("unchecked")
   public String execute() throws Exception {
-    mountStatus = mountDao.getMountsStatus();
+//    mountStatus = mountDao.getMountsStatus();
     ccdStatus = cameraDao.getCamersStatus();
     return "json";
   }

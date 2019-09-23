@@ -54,7 +54,7 @@ public class UpdateSystemInitStatus extends ActionSupport {
         sb.append( "',");
       }
       String tstr = sb.toString();
-      mountDao.updateStatus(tstr.substring(0,tstr.length()-1), status);
+//      mountDao.updateStatus(tstr.substring(0,tstr.length()-1), status);
     }
     if(!ccds.isEmpty()){
       StringBuilder sb = new StringBuilder();

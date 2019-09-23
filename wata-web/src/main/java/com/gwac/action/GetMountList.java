@@ -35,7 +35,7 @@ public class GetMountList extends ActionSupport {
   @SuppressWarnings("unchecked")
   public String execute() throws Exception {
         
-    mounts=mountDao.getAll();
+//    mounts=mountDao.getAll();
     return "json";
   }
 
