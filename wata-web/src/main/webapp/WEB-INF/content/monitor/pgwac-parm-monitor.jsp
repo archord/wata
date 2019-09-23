@@ -31,7 +31,7 @@
 
             #star-light-curve-show{
                 width: 100%;
-                height: 800px;
+                height: 700px;
                 margin-top: 10px
             }
 
@@ -42,7 +42,7 @@
             }
             #star-light-curve{
                 width: 100%; 
-                height: 700px;
+                height: 670px;
             }
         </style>
 

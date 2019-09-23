@@ -6,7 +6,7 @@ $(function () {
   var coorShow = [];
   var showImageIdx = 0;
   var totalImage = 1;
-  var playSpeed = 500;
+  var playSpeed = 1000;
   var imgShowInterval;
   
   var otCurve;
@@ -38,7 +38,7 @@ $(function () {
     var x1 = item[4];
     var y1 = item[5];
     //console.log(fName);
-    var fullImgUrl = gwacRootURL + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+    var fullImgUrl = "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
     var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
     + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
     //console.log(fullImgUrl);
@@ -145,7 +145,7 @@ $(function () {
       var x1 = item.series.data[item.dataIndex][4];
       var y1 = item.series.data[item.dataIndex][5];
 //      console.log(fName);
-      var fullImgUrl = gwacRootURL + "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+      var fullImgUrl = "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
       var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
       + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
 //      console.log(fullImgUrl);
