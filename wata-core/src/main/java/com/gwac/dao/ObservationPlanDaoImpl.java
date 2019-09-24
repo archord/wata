@@ -38,7 +38,7 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   }
 
   @Override
-  public String findRecord(int start, int length, String unitId, char executeStatus) {
+  public String findRecord(int start, int length, String unitId, String executeStatus) {
 
     String sql = "SELECT text(JSON_AGG((SELECT r FROM (SELECT tmp1.*) r))) "
             + "from(SELECT sl.* FROM observation_plan sl where execute_status='" + executeStatus + "' ";
@@ -57,7 +57,7 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   }
 
   @Override
-  public Long findRecordCount(String unitId, char executeStatus) {
+  public Long findRecordCount(String unitId, String executeStatus) {
 
     String sql = "SELECT count(*) FROM observation_plan  where execute_status='" + executeStatus + "' ";
     if (unitId != null && !unitId.isEmpty()) {

@@ -20,7 +20,7 @@ $(function() {
   }
 
   function loadObsPlanList2() {
-    var queryUrl = $("#getDonePlanForm").attr('action') + "?executeStatus=1";
+    var queryUrl = $("#getDonePlanForm").attr('action') + "?executeStatus=over";
     obsPlanTable2 = $('#obs-plan-table2').DataTable({
       serverSide: true,
       "deferRender": true,
@@ -42,44 +42,18 @@ $(function() {
       "columns": [
         {"data": "id"},
         {"data": "op_sn"},
-        {"data": "op_time"},
-        {"data": "unit_id"},
         {"data": "obs_type"},
-        {"data": "field_id"},
-        {"data": "ra"},
-        {"data": "img_type"},
-        {"data": "delay"},
-        {"data": "frame_count"},
-        {"data": "priority"},
-        {"data": "obj_id"},
-        {"data": "obj_ra"},
-        {"data": "pair_id"},
-        {"data": "op_type"}
+        {"data": "begin_time"},
+        {"data": "end_time"}
       ],
       "columnDefs": [{
           "targets": 0,
           "data": "ID?",
           "render": formateRowNumber
-        }, {
-          "targets": 3,
-          "data": "group-unit-id",
-          "render": formateGroupUnitId
-        }, {
-          "targets": 5,
-          "data": "grid-field-id",
-          "render": formateGridFieldId
-        }, {
-          "targets": 6,
-          "data": "position(ra,dec)",
-          "render": formatePosition
-        }, {
-          "targets": 8,
-          "data": "expusore-delay",
-          "render": formateExpusore
-        }, {
-          "targets": 12,
-          "data": "position(ra,dec)",
-          "render": formateObjPosition
+        },{
+          "targets": 2,
+          "data": "ID?",
+          "render": formateMode
         }],
       "language": {
         "lengthMenu": '显示 <select>' +
@@ -102,7 +76,7 @@ $(function() {
   }
 
   function loadObsPlanList() {
-    var queryUrl = $("#getUnDonePlanForm").attr('action') + "?executeStatus=0";
+    var queryUrl = $("#getUnDonePlanForm").attr('action') + "?executeStatus=begin";
     obsPlanTable = $('#obs-plan-table').DataTable({
       serverSide: true,
       "deferRender": true,
@@ -124,44 +98,18 @@ $(function() {
       "columns": [
         {"data": "id"},
         {"data": "op_sn"},
-        {"data": "op_time"},
-        {"data": "unit_id"},
         {"data": "obs_type"},
-        {"data": "field_id"},
-        {"data": "ra"},
-        {"data": "img_type"},
-        {"data": "delay"},
-        {"data": "frame_count"},
-        {"data": "priority"},
-        {"data": "obj_id"},
-        {"data": "obj_ra"},
-        {"data": "pair_id"},
-        {"data": "op_type"}
+        {"data": "begin_time"},
+        {"data": "end_time"}
       ],
       "columnDefs": [{
           "targets": 0,
           "data": "ID?",
           "render": formateRowNumber
-        }, {
-          "targets": 3,
-          "data": "group-unit-id",
-          "render": formateGroupUnitId
-        }, {
-          "targets": 5,
-          "data": "grid-field-id",
-          "render": formateGridFieldId
-        }, {
-          "targets": 6,
-          "data": "position(ra,dec)",
-          "render": formatePosition
-        }, {
-          "targets": 8,
-          "data": "expusore-delay",
-          "render": formateExpusore
-        }, {
-          "targets": 12,
-          "data": "position(ra,dec)",
-          "render": formateObjPosition
+        },{
+          "targets": 2,
+          "data": "ID?",
+          "render": formateMode
         }],
       "language": {
         "lengthMenu": '显示 <select>' +
@@ -188,8 +136,12 @@ $(function() {
   }
 
   /*full: json对象；meta：表格元素*/
-  function formateGroupUnitId(data, type, full, meta) {
-    return full.group_id + "-" + full.unit_id;
+  function formateMode(data, type, full, meta) {
+    var rst='引导跟踪';
+    if(data===2){
+      rst='定点指向';
+    }
+    return rst;
   }
   function formateGridFieldId(data, type, full, meta) {
     return full.grid_id + "-" + full.field_id;

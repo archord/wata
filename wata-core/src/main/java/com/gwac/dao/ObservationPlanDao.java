@@ -17,9 +17,9 @@ public interface ObservationPlanDao extends BaseHibernateDao<ObservationPlan> {
   
   public void updateObservationPlanStatus(ObservationPlanState obj);
 
-  public String findRecord(int start, int length, String unitId, char executeStatus);
+  public String findRecord(int start, int length, String unitId, String executeStatus);
 
-  public Long findRecordCount(String unitId, char executeStatus);
+  public Long findRecordCount(String unitId, String executeStatus);
 
   public String getAllUnObservated();
   

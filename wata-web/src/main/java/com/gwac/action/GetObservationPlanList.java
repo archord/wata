@@ -26,7 +26,7 @@ public class GetObservationPlanList extends ActionSupport {
   private int start;
   private int length;
   private String unitId;
-  private char executeStatus;
+  private String executeStatus;
 
   /**
    * search result
@@ -125,7 +125,7 @@ public class GetObservationPlanList extends ActionSupport {
   /**
    * @param executeStatus the executeStatus to set
    */
-  public void setExecuteStatus(char executeStatus) {
+  public void setExecuteStatus(String executeStatus) {
     this.executeStatus = executeStatus;
   }
 
