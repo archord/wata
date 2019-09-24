@@ -40,7 +40,7 @@ public class MountDaoImpl extends BaseHibernateDaoImpl<Mount> implements MountDa
     Session session = getCurrentSession();
     String sql = "update mount set time_utc=?, state=?, errcode=?, ra=?, dec=?, azi=?, alt=?,mount_id=? where group_id=? and unit_id=?";
     SQLQuery query = session.createSQLQuery(sql);
-    query.setDate(0, obj.getCtime());
+    query.setTimestamp(0, obj.getCtime());
     query.setInteger(1, obj.getState());
     query.setInteger(2, obj.getErrcode());
     query.setDouble(3, obj.getRa());

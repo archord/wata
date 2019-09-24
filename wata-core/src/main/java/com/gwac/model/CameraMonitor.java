@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -34,7 +32,6 @@ public class CameraMonitor implements Serializable {
   @Column(name = "camm_id", unique = true, nullable = false)
   private Long cammId;
   @Column(name = "time_utc")
-  @Temporal(TemporalType.DATE)
   private Date timeUtc;
   @Column(name = "state")
   private Integer state;

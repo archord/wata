@@ -31,6 +31,7 @@ import org.apache.struts2.convention.annotation.Action;
 public class UploadCameraStatus extends ActionSupport {
 
   private static final Log log = LogFactory.getLog(UploadCameraStatus.class);
+  private static final String dateFormateString2 = "yyyyMMdd HHmmss";
 
   private String groupId;
   private String unitId;
@@ -80,7 +81,7 @@ public class UploadCameraStatus extends ActionSupport {
         CameraMonitor obj = new CameraMonitor();
         obj.setCameraId(tcamera.getCameraId());
         if (null != utc) {
-          obj.setTimeUtc(CommonFunction.stringToDate(utc.replace("T", " ")));
+          obj.setTimeUtc(CommonFunction.stringToDate(utc.replace("T", " "), dateFormateString2));
         }
 //        obj.setFocus(focus);
         obj.setCoolget(coolget);

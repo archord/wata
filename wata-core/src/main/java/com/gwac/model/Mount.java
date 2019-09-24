@@ -22,7 +22,6 @@ public class Mount implements java.io.Serializable {
   private String name;
   private String unitId;
   private String groupId;
-  private Integer status;
   private String comment;
   private Long opSn;
   private String skyName;
@@ -94,21 +93,6 @@ public class Mount implements java.io.Serializable {
    */
   public void setGroupId(String groupId) {
     this.groupId = groupId;
-  }
-
-  /**
-   * @return the status
-   */
-  @Column(name = "status")
-  public Integer getStatus() {
-    return status;
-  }
-
-  /**
-   * @param status the status to set
-   */
-  public void setStatus(Integer status) {
-    this.status = status;
   }
 
   /**

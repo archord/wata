@@ -45,13 +45,13 @@ public class UpdateCameraLinked extends ActionSupport {
 
     if (null != gid && !gid.isEmpty() && null != uid && !uid.isEmpty() && null != cid && !cid.isEmpty()) {
       Integer tval = 0;
-      if (linked.equals("true")) {
+      if (linked!=null&&linked.equals("true")) {
 	tval = 1;
       }
       dao.updateLinked(gid, uid, cid, tval);
-      echo = "update mount linked success!";
+      echo = "update camera linked success!";
     } else {
-      echo = "mount error: gid or uid or cid is empty!";
+      echo = "camera error: gid or uid or cid is empty!";
     }
     log.debug(echo);
     sendResultMsg(echo);

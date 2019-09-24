@@ -44,7 +44,7 @@ public class UpdateMountLinked extends ActionSupport {
 
     if (null != gid && !gid.isEmpty() && null != uid && !uid.isEmpty()) {
       Integer tval = 0;
-      if (linked.equals("true")) {
+      if (linked!=null && linked.equals("true")) {
 	tval = 1;
       }
       dao.updateLinked(gid, uid, tval);

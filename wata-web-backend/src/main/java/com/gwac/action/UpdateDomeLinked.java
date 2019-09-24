@@ -9,7 +9,6 @@ package com.gwac.action;
  * @author xy
  */
 import com.gwac.dao.DomeDao;
-import com.gwac.dao.MountDao;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,7 +43,7 @@ public class UpdateDomeLinked extends ActionSupport {
 
     if (null != gid && !gid.isEmpty()) {
       Integer tval = 0;
-      if (linked.equals("true")) {
+      if (linked!=null&&linked.equals("true")) {
 	tval = 1;
       }
       dao.updateDomeLinked(gid, tval);

@@ -26,7 +26,7 @@ public class DomeDaoImpl extends BaseHibernateDaoImpl<Dome> implements DomeDao {
   @Override
   public Dome getByName(String gid) {
     Session session = getCurrentSession();
-    String sql = "select * from dome where gid='" + gid + "' ;";
+    String sql = "select * from dome where name='" + gid + "' ;";
     Query q = session.createSQLQuery(sql).addEntity(Dome.class);
     if (!q.list().isEmpty()) {
       return (Dome) q.list().get(0);
@@ -38,7 +38,7 @@ public class DomeDaoImpl extends BaseHibernateDaoImpl<Dome> implements DomeDao {
   @Override
   public void updateDomeLinked(String gId, Integer linked) {
     Session session = getCurrentSession();
-    String sql = "update dome set cover_linked=? where gid=?";
+    String sql = "update dome set linked=? where name=?";
     SQLQuery query = session.createSQLQuery(sql);
     query.setInteger(0, linked);
     query.setString(1, gId);
@@ -49,9 +49,9 @@ public class DomeDaoImpl extends BaseHibernateDaoImpl<Dome> implements DomeDao {
   @Override
   public void updateDomeStatus(DomeStatus obj) {
     Session session = getCurrentSession();
-    String sql = "update camera set ctime=?, state=?, errcode=? where dome_id=?";
+    String sql = "update dome set ctime=?, status=?, errcode=? where dome_id=?";
     SQLQuery query = session.createSQLQuery(sql);
-    query.setDate(0, obj.getCtime());
+    query.setTimestamp(0, obj.getCtime());
     query.setInteger(1, obj.getStatus());
     query.setInteger(2, obj.getErrcode());
     query.setInteger(3, obj.getDomeId());

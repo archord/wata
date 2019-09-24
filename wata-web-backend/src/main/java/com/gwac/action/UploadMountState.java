@@ -50,7 +50,7 @@ public class UploadMountState extends ActionSupport {
   
   private String echo = "";
 
-  @Action(value = "updateMountLinked")
+  @Action(value = "updateMountState")
   public void upload() {
 
     echo = "";
@@ -61,6 +61,7 @@ public class UploadMountState extends ActionSupport {
       MountState obj = new MountState();
       obj.setMountId(mount.getMountId());
       if (ctime != null && !ctime.isEmpty()) {
+	ctime = ctime.replace("T", " ");
 	obj.setCtime(CommonFunction.stringToDate(ctime, dateFormateString2));
       }
       obj.setGroupId(gid);

@@ -45,7 +45,7 @@ public class UpdateCameraCoverLinked extends ActionSupport {
 
     if (null != gid && !gid.isEmpty() && null != uid && !uid.isEmpty() && null != cid && !cid.isEmpty()) {
       Integer tval = 0;
-      if (linked.equals("true")) {
+      if (linked!=null&&linked.equals("true")) {
 	tval = 1;
       }
       dao.updateCoverLinked(gid, uid, cid, tval);

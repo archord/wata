@@ -31,8 +31,9 @@ import org.apache.struts2.convention.annotation.Action;
 public class UploadDomeStatus extends ActionSupport {
 
   private static final Log log = LogFactory.getLog(UploadDomeStatus.class);
+  private static final String dateFormateString2 = "yyyyMMdd HHmmss";
 
-  private String gId;
+  private String gid;
   private String utc;
   private Integer state;
   private Integer errcode;
@@ -43,24 +44,25 @@ public class UploadDomeStatus extends ActionSupport {
   private DomeStatusDao dao2;
   private String echo = "";
 
-  @Action(value = "uploadCameraStatus")
+  @Action(value = "uploadDomeStatus")
   public void upload() {
 
     echo = "";
+    log.debug("gid:" + gid);
     log.debug("utc:" + utc);
     log.debug("state:" + state);
     log.debug("errcode:" + errcode);
 
-    if (gId == null || gId.isEmpty()) {
+    if (gid == null || gid.isEmpty()) {
       echo = "groupId cannot be empty.";
       log.warn(echo);
     } else {
-      Dome tdome = dao1.getByName(gId);
+      Dome tdome = dao1.getByName(gid);
       if (tdome != null) {
         DomeStatus obj = new DomeStatus();
         obj.setDomeId(tdome.getDomeId());
         if (null != utc) {
-          obj.setCtime(CommonFunction.stringToDate(utc.replace("T", " ")));
+          obj.setCtime(CommonFunction.stringToDate(utc.replace("T", " "), dateFormateString2));
         }
         obj.setStatus(state);
         obj.setErrcode(errcode);
@@ -68,7 +70,7 @@ public class UploadDomeStatus extends ActionSupport {
 	dao1.updateDomeStatus(obj);
         echo = "receive parameter success.";
       } else {
-        echo = "can not find dome: " + gId;
+        echo = "can not find dome: " + gid;
       }
       log.debug(echo);
     }
@@ -117,4 +119,10 @@ public class UploadDomeStatus extends ActionSupport {
     this.errcode = errcode;
   }
 
+  /**
+   * @param gid the gid to set
+   */
+  public void setGid(String gid) {
+    this.gid = gid;
+  }
 }

@@ -10,10 +10,8 @@ package com.gwac.action;
  */
 import com.gwac.dao.CameraCoverStatusDao;
 import com.gwac.dao.CameraDao;
-import com.gwac.dao.CameraMonitorDao;
 import com.gwac.model.Camera;
 import com.gwac.model.CameraCoverStatus;
-import com.gwac.model.CameraMonitor;
 import com.gwac.util.CommonFunction;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.IOException;
@@ -33,6 +31,7 @@ import org.apache.struts2.convention.annotation.Action;
 public class UploadCameraCoverStatus extends ActionSupport {
 
   private static final Log log = LogFactory.getLog(UploadCameraCoverStatus.class);
+  private static final String dateFormateString2 = "yyyyMMdd HHmmss";
 
   private String groupId;
   private String unitId;
@@ -68,7 +67,7 @@ public class UploadCameraCoverStatus extends ActionSupport {
         CameraCoverStatus obj = new CameraCoverStatus();
         obj.setCameraId(tcamera.getCameraId());
         if (null != utc) {
-          obj.setCtime(CommonFunction.stringToDate(utc.replace("T", " ")));
+          obj.setCtime(CommonFunction.stringToDate(utc.replace("T", " "), dateFormateString2));
         }
         obj.setState(state);
         obj.setErrcode(errcode);

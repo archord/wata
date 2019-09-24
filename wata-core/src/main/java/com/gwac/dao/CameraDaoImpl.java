@@ -54,9 +54,9 @@ public class CameraDaoImpl extends BaseHibernateDaoImpl<Camera> implements Camer
   @Override
   public void updateCameraStatus(CameraMonitor obj) {
     Session session = getCurrentSession();
-    String sql = "update camera set camera_utc=?, state=?, errcode=?, coolget=? where camera_id=?";
+    String sql = "update camera set camera_utc=?, status=?, errcode=?, coolget=? where camera_id=?";
     SQLQuery query = session.createSQLQuery(sql);
-    query.setDate(0, obj.getTimeUtc());
+    query.setTimestamp(0, obj.getTimeUtc());
     query.setInteger(1, obj.getState());
     query.setInteger(2, obj.getErrcode());
     query.setFloat(3, obj.getCoolget());
@@ -70,7 +70,7 @@ public class CameraDaoImpl extends BaseHibernateDaoImpl<Camera> implements Camer
     Session session = getCurrentSession();
     String sql = "update camera set camera_cover_utc=?, cover_status=?, camera_cover_errcode=? where camera_id=?";
     SQLQuery query = session.createSQLQuery(sql);
-    query.setDate(0, obj.getCtime());
+    query.setTimestamp(0, obj.getCtime());
     query.setInteger(1, obj.getState());
     query.setInteger(2, obj.getErrcode());
     query.setInteger(3, obj.getCameraId());
@@ -144,7 +144,8 @@ public class CameraDaoImpl extends BaseHibernateDaoImpl<Camera> implements Camer
   @Override
   public Camera getByName(String gid,String uid,String cid) {
     Session session = getCurrentSession();
-    String sql = "select * from camera where gid='" + gid + "' uid='" + uid + "' cid='" + cid + "';";
+    String sql = "select * from camera where gid='" + gid + "' and uid='" + uid + "' and cid='" + cid + "';";
+
     Query q = session.createSQLQuery(sql).addEntity(Camera.class);
     if (!q.list().isEmpty()) {
       return (Camera) q.list().get(0);
