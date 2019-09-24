@@ -6,6 +6,7 @@
 package com.gwac.dao;
 
 import com.gwac.model.ObservationPlan;
+import com.gwac.model.ObservationPlanState;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ import java.util.List;
  * @author msw
  */
 public interface ObservationPlanDao extends BaseHibernateDao<ObservationPlan> {
+  
+  public void updateObservationPlanStatus(ObservationPlanState obj);
 
   public String findRecord(int start, int length, String unitId, char executeStatus);
 

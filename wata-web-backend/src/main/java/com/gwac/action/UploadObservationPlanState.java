@@ -8,6 +8,7 @@ package com.gwac.action;
  *
  * @author xy
  */
+import com.gwac.dao.ObservationPlanDao;
 import com.gwac.dao.ObservationPlanStateDao;
 import com.gwac.model.ObservationPlanState;
 import com.gwac.util.CommonFunction;
@@ -33,6 +34,8 @@ public class UploadObservationPlanState extends ActionSupport {
 
   @Resource
   private ObservationPlanStateDao obsPlanStateDao;
+  @Resource
+  private ObservationPlanDao obsPlanDao;
 
   private String opId;
   private String state;
@@ -46,10 +49,13 @@ public class UploadObservationPlanState extends ActionSupport {
 
     if (null != opId && !opId.isEmpty()) {
       ObservationPlanState obsPlanState = new ObservationPlanState();
-      obsPlanState.setOpId(Integer.parseInt(opId));
+      obsPlanState.setOpId(Long.parseLong(opId));
       obsPlanState.setState(state);
-      obsPlanState.setCtime(CommonFunction.stringToDate(ctime, dateFormateString2));
+      if (null != ctime) {
+	obsPlanState.setCtime(CommonFunction.stringToDate(ctime.replace("T", " "), dateFormateString2));
+      }
       obsPlanStateDao.save(obsPlanState);
+      obsPlanDao.updateObservationPlanStatus(obsPlanState);
       echo = "upload observation success!";
     } else {
       echo = "error: observation plan id is empty!";

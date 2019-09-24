@@ -22,35 +22,35 @@ import org.hibernate.annotations.Parameter;
  * @author msw
  */
 @Entity
-@Table(name = "dome_status", schema = "public")
-public class DomeStatus implements Serializable {
+@Table(name = "rainfall", schema = "public")
+public class Rainfall implements Serializable {
 
   /**
-   * @return the domeStatusId
+   * @return the rainId
    */
-  public long getDomeStatusId() {
-    return domeStatusId;
+  public long getRainId() {
+    return rainId;
   }
 
   /**
-   * @param domeStatusId the domeStatusId to set
+   * @param rainId the rainId to set
    */
-  public void setDomeStatusId(long domeStatusId) {
-    this.domeStatusId = domeStatusId;
+  public void setRainId(long rainId) {
+    this.rainId = rainId;
   }
 
   /**
-   * @return the domeId
+   * @return the gid
    */
-  public Integer getDomeId() {
-    return domeId;
+  public String getGid() {
+    return gid;
   }
 
   /**
-   * @param domeId the domeId to set
+   * @param gid the gid to set
    */
-  public void setDomeId(Integer domeId) {
-    this.domeId = domeId;
+  public void setGid(String gid) {
+    this.gid = gid;
   }
 
   /**
@@ -68,51 +68,36 @@ public class DomeStatus implements Serializable {
   }
 
   /**
-   * @return the status
+   * @return the value
    */
-  public Integer getStatus() {
-    return status;
+  public Float getValue() {
+    return value;
   }
 
   /**
-   * @param status the status to set
+   * @param value the value to set
    */
-  public void setStatus(Integer status) {
-    this.status = status;
+  public void setValue(Float value) {
+    this.value = value;
   }
 
-  /**
-   * @return the errcode
-   */
-  public Integer getErrcode() {
-    return errcode;
-  }
-
-  /**
-   * @param errcode the errcode to set
-   */
-  public void setErrcode(Integer errcode) {
-    this.errcode = errcode;
-  }
 
   private static final long serialVersionUID = 1L;  
   
   @Id
   @GenericGenerator(name = "generator", strategy = "seqhilo", parameters = {
     @Parameter(name = "max_lo", value = "49"),
-    @Parameter(name = "sequence", value = "dome_status_id_seq")})
+    @Parameter(name = "sequence", value = "rain_id_seq")})
   @GeneratedValue(generator = "generator")
-  @Column(name = "dome_status_id", unique = true, nullable = false)
-  private long domeStatusId;
-  @Column(name = "dome_id")
-  private Integer domeId;
+  @Column(name = "rain_id", unique = true, nullable = false)
+  private long rainId;
+  @Column(name = "gid")
+  private String gid;
   @Column(name = "ctime")
   @Temporal(TemporalType.TIMESTAMP)
   private Date ctime;
-  @Column(name = "status")
-  private Integer status;
-  @Column(name = "errcode")
-  private Integer errcode;
+  @Column(name = "value")
+  private Float value;
 
   
 }

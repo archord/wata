@@ -45,6 +45,10 @@ public class ObservationPlan implements java.io.Serializable {
   private Date beginTime;
   private Date endTime;
   private Integer pairId;
+  
+  private Date recvTime;
+  private String executeStatus;
+  private Date ctime;
 
   public boolean checkValid() {
     if (opTime == null) {
@@ -374,4 +378,49 @@ public class ObservationPlan implements java.io.Serializable {
     this.pairId = pairId;
   }
 
+
+  /**
+   * @return the recvTime
+   */
+  @Column(name = "recv_time")
+  public Date getRecvTime() {
+    return recvTime;
+  }
+
+  /**
+   * @param recvTime the recvTime to set
+   */
+  public void setRecvTime(Date recvTime) {
+    this.recvTime = recvTime;
+  }
+
+  /**
+   * @return the executeStatus
+   */
+  @Column(name = "execute_status")
+  public String getExecuteStatus() {
+    return executeStatus;
+  }
+
+  /**
+   * @param executeStatus the executeStatus to set
+   */
+  public void setExecuteStatus(String executeStatus) {
+    this.executeStatus = executeStatus;
+  }
+
+  /**
+   * @return the ctime
+   */
+  @Column(name = "ctime")
+  public Date getCtime() {
+    return ctime;
+  }
+
+  /**
+   * @param ctime the ctime to set
+   */
+  public void setCtime(Date ctime) {
+    this.ctime = ctime;
+  }
 }

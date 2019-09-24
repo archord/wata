@@ -5,12 +5,15 @@
  */
 package com.gwac.dao;
 
+import com.gwac.model.ObservationPlanState;
 import com.gwac.model.ObservationPlan;
 import java.math.BigInteger;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,6 +24,18 @@ import org.springframework.stereotype.Repository;
 public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan> implements ObservationPlanDao {
 
   private static final Log log = LogFactory.getLog(ObservationPlanDaoImpl.class);
+  
+  @Override
+  public void updateObservationPlanStatus(ObservationPlanState obj) {
+    Session session = getCurrentSession();
+    String sql = "update observation_plan set ctime=?, execute_status=? where op_sn=?";
+    SQLQuery query = session.createSQLQuery(sql);
+    query.setTimestamp(0, obj.getCtime());
+    query.setString(1, obj.getState());
+    query.setLong(2, obj.getOpId());
+    
+    query.executeUpdate();
+  }
 
   @Override
   public String findRecord(int start, int length, String unitId, char executeStatus) {

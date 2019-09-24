@@ -8,11 +8,13 @@ package com.gwac.dao;
 import com.gwac.model.ObservationPlanState;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author xy
  */
+@Repository
 public class ObservationPlanStateDaoImpl extends BaseHibernateDaoImpl<ObservationPlanState> implements ObservationPlanStateDao {
   
   private static final Log log = LogFactory.getLog(ObservationPlanStateDaoImpl.class);
