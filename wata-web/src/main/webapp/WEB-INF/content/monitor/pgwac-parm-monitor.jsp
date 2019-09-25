@@ -88,6 +88,7 @@
                                 <a id="movObjfullImg" href="<%=request.getContextPath()%>/resource/images/yuntu.jpg">
                                     <img id="movObjSubImg" src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 10px; "/></a>
                                     <br/><br/>
+                                    <input type="button" value="开始自动播放" class="btn btn-primary" id="autoShow" style="font-size: 15px"/>
                             </div>
                         </div>
                     </div>

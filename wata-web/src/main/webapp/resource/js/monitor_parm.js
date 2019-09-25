@@ -8,6 +8,7 @@ $(function () {
   var totalImage = 1;
   var playSpeed = 1000;
   var imgShowInterval;
+  var autoShowRunning = true;
   
   var otCurve;
   var plotOption = {
@@ -31,6 +32,12 @@ $(function () {
   $('#obsDate').change(clearSelectCamera);
   $('#ccdList').change(changeCCDs);
   $('#objList').change(loadObjectRecords);
+  $('#autoShow').click(function(){
+    if(autoShowRunning===false){
+      imgShowInterval = setInterval(showImage, playSpeed);
+      autoShowRunning = true;
+    }
+  });
   
   function showImage(){
     var item = coorShow[showImageIdx];
@@ -44,8 +51,18 @@ $(function () {
     //console.log(fullImgUrl);
     $("#movObjSubImg").attr("src", subImgUrl);
     $("#movObjfullImg").attr("href", fullImgUrl);
+    
+    var highlightIdx=showImageIdx;
+    var unhighlightIdx=highlightIdx-1;
+    if(unhighlightIdx<0){
+      unhighlightIdx=unhighlightIdx+totalImage;
+    }
+    otCurve.highlight(0, highlightIdx);
+    otCurve.unhighlight(0, unhighlightIdx);
+    
     showImageIdx = showImageIdx+1;
     showImageIdx=showImageIdx%totalImage;
+    
   }
 
   function clearSelectCamera() {
@@ -136,7 +153,17 @@ $(function () {
 
     $("#star-light-curve").bind("plothover", function (event, pos, item) {
       if (item) {
+        var unhighlightIdx=showImageIdx-1;
+        if(unhighlightIdx<0){
+          unhighlightIdx=unhighlightIdx+totalImage;
+        }
+        otCurve.unhighlight(0, unhighlightIdx);
+        showImageIdx=item.dataIndex;
+        otCurve.highlight(0, showImageIdx);
+        showImageIdx = showImageIdx+1;
+        showImageIdx=showImageIdx%totalImage;
         clearInterval(imgShowInterval);
+        autoShowRunning = false;
         var x = item.datapoint[0].toFixed(4);
         var y = item.datapoint[1].toFixed(2);
         $("#tooltip").html(item.series.data[item.dataIndex][3]).css({top: item.pageY - 25, left: item.pageX + 10}).fadeIn(200);
@@ -158,10 +185,8 @@ $(function () {
   }
 
   function starCurveShow(data) {
-//    console.log(data[0]);
     var minDate = data[0]['date_ut'];
     var minDateMinute = Date.parse(minDate) / 60000;
-//    console.log(minDate);
 
     $('#startDay').html(minDate);
 
@@ -176,21 +201,18 @@ $(function () {
        var dateObj = Date.parse(item['date_ut']) / 60000;
        var minute = dateObj - minDateMinute;
        coorShow.push([minute, item['mag_aper'], item['magerr_aper'], item['date_ut'], item['x'], item['y'], item['img_name']]);
-//       coorShow.push([minute, item['mag_aper']]);
     });
-//    console.log(coorShow);
-    var aa = {
+    var datas = [{
         label: 'move object light curve',
         data: coorShow,
         points: {radius: 1},
         color:'red'
-      };
+      }];
       
-    otCurve = $.plot("#star-light-curve", [aa], plotOption);
-    //otCurve.setData(showCCDs);
-//    otCurve.draw();
+    otCurve = $.plot("#star-light-curve", datas, plotOption);
     totalImage = coorShow.length;
     imgShowInterval = setInterval(showImage, playSpeed);
+    autoShowRunning = true;
   }
 
 
