@@ -49,7 +49,7 @@ public class UpdateCameraCoverLinked extends ActionSupport {
 	tval = 1;
       }
       dao.updateCoverLinked(gid, uid, cid, tval);
-      echo = "update mount linked success!";
+      echo = "update camera cover linked success!";
     } else {
       echo = "mount error: gid or uid or cid is empty!";
     }

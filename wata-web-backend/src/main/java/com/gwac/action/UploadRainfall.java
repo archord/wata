@@ -58,7 +58,7 @@ public class UploadRainfall extends ActionSupport {
         obj.setGid(gid);
 	obj.setValue(value);
         dao.save(obj);
-        echo = "receive parameter success.";
+        echo = "upload rainfall success.";
       log.debug(echo);
     }
 

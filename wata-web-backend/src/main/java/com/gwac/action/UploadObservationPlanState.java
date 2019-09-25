@@ -56,7 +56,7 @@ public class UploadObservationPlanState extends ActionSupport {
       }
       obsPlanStateDao.save(obsPlanState);
       obsPlanDao.updateObservationPlanStatus(obsPlanState);
-      echo = "upload observation success!";
+      echo = "upload observation state success!";
     } else {
       echo = "error: observation plan id is empty!";
     }

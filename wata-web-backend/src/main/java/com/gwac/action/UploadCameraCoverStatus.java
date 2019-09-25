@@ -73,7 +73,7 @@ public class UploadCameraCoverStatus extends ActionSupport {
         obj.setErrcode(errcode);
         cmDao.save(obj);
 	cameraDao.updateCameraCoverStatus(obj);
-        echo = "receive parameter success.";
+        echo = "upload camera cover state success.";
       } else {
         echo = "can not find camera: " + camId;
       }

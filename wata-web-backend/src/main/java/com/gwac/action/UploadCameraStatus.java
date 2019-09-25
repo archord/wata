@@ -94,7 +94,7 @@ public class UploadCameraStatus extends ActionSupport {
 //        obj.setFileName(fileName);
         cmDao.save(obj);
 	cameraDao.updateCameraStatus(obj);
-        echo = "receive parameter success.";
+        echo = "upload camera status success.";
       } else {
         echo = "can not find camera: " + camId;
       }

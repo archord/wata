@@ -68,7 +68,7 @@ public class UploadDomeStatus extends ActionSupport {
         obj.setErrcode(errcode);
         dao2.save(obj);
 	dao1.updateDomeStatus(obj);
-        echo = "receive parameter success.";
+        echo = "upload dome state success.";
       } else {
         echo = "can not find dome: " + gid;
       }
