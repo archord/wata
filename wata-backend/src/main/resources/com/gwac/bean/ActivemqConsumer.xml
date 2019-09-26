@@ -1,24 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-  <bean id="crossObjectCheckConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="jmsFactory"/>
-    <property name="destination" ref="crossObjectCheckDest" />
-    <property name="messageListener" ref="crossObjectCheckListener" />
-  </bean>
-  
-  <bean id="crossTaskConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="jmsFactory"/>
-    <property name="destination" ref="crossTaskDest" />
-    <property name="messageListener" ref="crossTaskListener" />
-  </bean>
-  
-  <bean id="otCheckConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="jmsFactory"/>
-    <property name="destination" ref="otCheckDest" />
-    <property name="messageListener" ref="oTCheckListener" />
-  </bean>
   
   <bean id="otListConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
     <property name="connectionFactory" ref="jmsFactory"/>
@@ -26,27 +8,11 @@
     <property name="messageListener" ref="oTListListener" />
   </bean>
   
-  <bean id="otFollowConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="jmsFactory"/>
-    <property name="destination" ref="otFollowDest" />
-    <property name="messageListener" ref="oTFollowListener" />
-  </bean>
-  
   <bean id="regOrigImageConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
     <property name="connectionFactory" ref="jmsFactory"/>
     <property name="destination" ref="regOrigImageDest" />
     <property name="messageListener" ref="regOrigImageListener" />
   </bean>
-  <bean id="followUpCatalogConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="jmsFactory"/>
-    <property name="destination" ref="followUpCatalogDest" />
-    <property name="messageListener" ref="followUpCatalogListener" />
-  </bean>
-<!--  <bean id="followUpObjCheckConsumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="jmsFactory"/>
-    <property name="destination" ref="followUpObjCheckDest" />
-    <property name="messageListener" ref="followUpObjCheckListener" />
-  </bean>-->
  
   
 </beans>

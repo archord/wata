@@ -19,13 +19,7 @@
     <property name="targetMethod" value="startJob" /> 
     <property name="concurrent" value="false" />
   </bean> 
-  
-  <bean id="ot2CheckJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="ot2CheckService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
+
   
   <bean id="findMoveObjectJob" 
         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
@@ -117,14 +111,7 @@
     <property name="repeatInterval" value="150000000000" />  
     <property name="startDelay" value="5000" />   
   </bean>
-  
-  <bean id="ot2CheckTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="ot2CheckJob" />
-    <property name="repeatInterval" value="150000000000" />  
-    <property name="startDelay" value="10000" />   
-  </bean>
-  
+    
   <bean id="followUpRecordTrigger" 
         class="org.springframework.scheduling.quartz.SimpleTriggerBean">
     <property name="jobDetail" ref="followUpRecordJob" />

@@ -56,7 +56,11 @@ public final class RegOrigImageServiceImpl implements RegOrigImageService {
       log.error("can not find cameraId: " + camId);
     } else {
 
-      String tDateFormate = "yyyy-MM-dd HH:mm:ss";
+      String tDateFormate = "yyyyMMdd HHmmss";
+      if(genTime.indexOf('.')>0){
+	genTime=genTime.substring(0, genTime.indexOf('.'));
+      }
+      genTime=genTime.replace('T', ' ');
       Date ffDate = CommonFunction.stringToDate(genTime, tDateFormate);
 
       FitsFile2 ff2 = new FitsFile2();
