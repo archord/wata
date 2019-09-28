@@ -270,9 +270,9 @@
           <tr><td>选择天区:</td><td><select name="formqp.obsSky" id="obsSky" class="ot1-input" data-toggle="select">
                 <option style="background-color:#000" value="0"  selected>请选择</option>
               </select></td></tr>
-          <tr><td>选择CCD:</td><td><select name="formqp.obsCcd" id="obsCcd" class="ot1-input" data-toggle="select">
+<!--          <tr><td>选择CCD:</td><td><select name="formqp.obsCcd" id="obsCcd" class="ot1-input" data-toggle="select">
                 <option style="background-color:#000" value="0" selected>请选择</option>
-              </select></td></tr>
+              </select></td></tr>-->
           <tr><td>边界左上:</td><td><input type="text" id="leftTopBound" class="ot1-input" value="60,60"/></td></tr>
           <tr><td>边界右下:</td><td><input type="text" id="rightBottomBound" class="ot1-input" value="70,70"/></td></tr>
           <tr><td colspan="2"><a href="javascript:void(0);" id="changeView" style="text-decoration:none;color:#fff;">切换视角</a>

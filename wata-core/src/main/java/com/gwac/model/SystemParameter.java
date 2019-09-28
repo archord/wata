@@ -29,6 +29,9 @@ public class SystemParameter implements java.io.Serializable {
   private String clouldImagePath;
   private String latestClouldImage;
   private Date latestClouldImageTime;
+  private String controlServerIp;
+  private String systemStatus;
+  private Integer controlServerPort;
 
   @Id
   @GenericGenerator(name = "generator", strategy = "seqhilo", parameters = {
@@ -135,6 +138,51 @@ public class SystemParameter implements java.io.Serializable {
    */
   public void setLatestClouldImageTime(Date latestClouldImageTime) {
     this.latestClouldImageTime = latestClouldImageTime;
+  }
+
+  /**
+   * @return the controlServerIp
+   */
+  @Column(name = "control_server_ip")
+  public String getControlServerIp() {
+    return controlServerIp;
+  }
+
+  /**
+   * @param controlServerIp the controlServerIp to set
+   */
+  public void setControlServerIp(String controlServerIp) {
+    this.controlServerIp = controlServerIp;
+  }
+
+  /**
+   * @return the systemStatus
+   */
+  @Column(name = "system_status")
+  public String getSystemStatus() {
+    return systemStatus;
+  }
+
+  /**
+   * @param systemStatus the systemStatus to set
+   */
+  public void setSystemStatus(String systemStatus) {
+    this.systemStatus = systemStatus;
+  }
+
+  /**
+   * @return the controlServerPort
+   */
+  @Column(name = "control_server_port")
+  public Integer getControlServerPort() {
+    return controlServerPort;
+  }
+
+  /**
+   * @param controlServerPort the controlServerPort to set
+   */
+  public void setControlServerPort(Integer controlServerPort) {
+    this.controlServerPort = controlServerPort;
   }
   
 }

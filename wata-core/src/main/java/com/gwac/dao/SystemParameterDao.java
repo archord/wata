@@ -11,4 +11,5 @@ import com.gwac.model.SystemParameter;
  * @author xy
  */
 public interface SystemParameterDao extends BaseHibernateDao<SystemParameter> {
+  public void updateControlServerIpPort(SystemParameter sp);
 }

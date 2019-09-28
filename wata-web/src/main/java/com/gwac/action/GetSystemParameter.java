@@ -5,16 +5,12 @@ import com.gwac.dao.DomeDao;
 import com.gwac.dao.MountDao;
 import com.gwac.dao.RainfallDao;
 import com.gwac.dao.SystemParameterDao;
-import com.gwac.dao.SystemStatusMonitorDao;
-import com.gwac.linefind.CommonFunction;
 import com.gwac.model.Camera;
 import com.gwac.model.Dome;
 import com.gwac.model.Mount;
 import com.gwac.model.Rainfall;
 import com.gwac.model.SystemParameter;
-import com.gwac.model.SystemStatusMonitor;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.*;
 import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,9 +48,9 @@ public class GetSystemParameter extends ActionSupport {
 
     log.debug("get SystemParameter");
     systemParameter = systemParameterDao.getById((long)0);
-    camera = cameraDao.getByName("001", "002", "003");
+    camera = cameraDao.getByName("001", "001", "001");
     dome = domeDao.getByName("001");
-    mount = mountDao.getByGroupUnitId("001", "002");
+    mount = mountDao.getByGroupUnitId("001", "001");
     rainfall = rainfallDao.getLatestRecord();
 
     return SUCCESS;

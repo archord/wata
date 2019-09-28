@@ -61,10 +61,8 @@
                             
                         </select><br/>
                         <select name="formqp.ccdList" id="ccdList" class="form-control select select-primary" data-toggle="select" size="4"  multiple="multiple">
-                            <option value="1">G011</option>
-                            <option value="2">G012</option>
-                            <option value="3">G013</option>
-                            <option value="7">G022</option>
+                            <option value="53">G001</option>
+                            <option value="7">Gtest</option>
                         </select><br/>
                         <select name="formqp.objList" id="objList" class="form-control select select-primary" data-toggle="select" size="16">
 
