@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
 public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan> implements ObservationPlanDao {
 
   private static final Log log = LogFactory.getLog(ObservationPlanDaoImpl.class);
-  
+
   @Override
   public void updateObservationPlanStatus(ObservationPlanState obj) {
     Session session = getCurrentSession();
@@ -33,7 +33,7 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
     query.setTimestamp(0, obj.getCtime());
     query.setString(1, obj.getState());
     query.setLong(2, obj.getOpId());
-    
+
     query.executeUpdate();
   }
 
@@ -41,11 +41,16 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   public String findRecord(int start, int length, String unitId, String executeStatus) {
 
     String sql = "SELECT text(JSON_AGG((SELECT r FROM (SELECT tmp1.*) r))) "
-            + "from(SELECT sl.* FROM observation_plan sl where execute_status='" + executeStatus + "' ";
-    if (unitId != null && !unitId.isEmpty()) {
-      sql += "and unit_id='" + unitId + "' ";
+	    + "from(SELECT sl.* FROM observation_plan sl ";
+    if (executeStatus.equalsIgnoreCase("begin") || executeStatus.equalsIgnoreCase("over")) {
+      sql = sql + " where execute_status is not null ";
+    }else{
+      sql = sql + " where execute_status is null ";
     }
-    sql += "ORDER BY op_time desc OFFSET " + start + " LIMIT " + length + " )as tmp1";
+//    if (unitId != null && !unitId.isEmpty()) {
+//      sql += "and unit_id='" + unitId + "' ";
+//    }
+    sql += "ORDER BY begin_time desc OFFSET " + start + " LIMIT " + length + " )as tmp1";
 
     //log.debug(sql);
     String rst = "";
@@ -59,10 +64,16 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   @Override
   public Long findRecordCount(String unitId, String executeStatus) {
 
-    String sql = "SELECT count(*) FROM observation_plan  where execute_status='" + executeStatus + "' ";
-    if (unitId != null && !unitId.isEmpty()) {
-      sql += "and unit_id='" + unitId + "' ";
+    String sql = "SELECT count(*) FROM observation_plan  ";
+
+    if (executeStatus.equalsIgnoreCase("begin") || executeStatus.equalsIgnoreCase("over")) {
+      sql = sql + " where execute_status is not null ";
+    }else{
+      sql = sql + " where execute_status is null ";
     }
+//    if (unitId != null && !unitId.isEmpty()) {
+//      sql += "and unit_id='" + unitId + "' ";
+//    }
     Query q = this.getCurrentSession().createSQLQuery(sql);
     return ((BigInteger) q.list().get(0)).longValue();
   }
@@ -71,8 +82,8 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   public String getAllUnObservated() {
 
     String sql = "SELECT text(JSON_AGG((SELECT r FROM (SELECT tmp1.*) r))) "
-            + "from(SELECT sl.* FROM observation_plan sl where execute_status='0' "
-            + "ORDER BY op_time desc )as tmp1";
+	    + "from(SELECT sl.* FROM observation_plan sl where execute_status='0' "
+	    + "ORDER BY op_time desc )as tmp1";
 
     //log.debug(sql);
     String rst = "";
@@ -87,8 +98,8 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   public List<String> getFieldId(String dateStr, String unitId) {
 
     String sql = "select DISTINCT field_id "
-            + "from observation_plan "
-            + "where unit_id='" + unitId + "' and op_time>='" + dateStr + " 8:00:00' and op_time<'" + dateStr + " 23:59:59'";
+	    + "from observation_plan "
+	    + "where unit_id='" + unitId + "' and op_time>='" + dateStr + " 8:00:00' and op_time<'" + dateStr + " 23:59:59'";
 
     Query q = this.getCurrentSession().createSQLQuery(sql);
     return q.list();
@@ -98,19 +109,18 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   public ObservationPlan getLatestObservationPlanByFieldId(String unitId, String fieldId) {
 
     String sql = "select * "
-            + "from observation_plan "
-            + "where unit_id='" + unitId + "' and field_id='" + fieldId + "'  "
-            + "ORDER BY op_id desc limit 1";
+	    + "from observation_plan "
+	    + "where unit_id='" + unitId + "' and field_id='" + fieldId + "'  "
+	    + "ORDER BY op_id desc limit 1";
 
     Query q = this.getCurrentSession().createSQLQuery(sql).addEntity(ObservationPlan.class);
-    
+
     ObservationPlan tobsPlan = null;
-    if(q.list().size()>0){
-      tobsPlan = (ObservationPlan)q.list().get(0);
+    if (q.list().size() > 0) {
+      tobsPlan = (ObservationPlan) q.list().get(0);
     }
     return tobsPlan;
   }
-  
 
   @Override
   public Boolean exist(String opSn) {
@@ -118,9 +128,9 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
     String sql = "select * from observation_plan where op_sn=" + opSn;
 
     Query q = this.getCurrentSession().createSQLQuery(sql).addEntity(ObservationPlan.class);
-    
+
     Boolean rst = false;
-    if(q.list().size()>0){
+    if (q.list().size() > 0) {
       rst = true;
     }
     return rst;

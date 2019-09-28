@@ -10,17 +10,17 @@ $(function() {
 
   function onTelescopeChange() {
     var formData = $("#getUnDonePlanForm").serialize();
-    var queryUrl = $("#getUnDonePlanForm").attr('action') + "?executeStatus=0&timestamp=" + new Date().getTime() + "&" + formData;
+    var queryUrl = $("#getUnDonePlanForm").attr('action') + "?executeStatus=undo&timestamp=" + new Date().getTime() + "&" + formData;
     obsPlanTable.ajax.url(queryUrl).load();
   }
   function onTelescopeChange2() {
     var formData = $("#getDonePlanForm").serialize();
-    var queryUrl = $("#getDonePlanForm").attr('action') + "?executeStatus=1&timestamp=" + new Date().getTime() + "&" + formData;
+    var queryUrl = $("#getDonePlanForm").attr('action') + "?executeStatus=begin&timestamp=" + new Date().getTime() + "&" + formData;
     obsPlanTable2.ajax.url(queryUrl).load();
   }
 
   function loadObsPlanList2() {
-    var queryUrl = $("#getDonePlanForm").attr('action') + "?executeStatus=over";
+    var queryUrl = $("#getDonePlanForm").attr('action') + "?executeStatus=begin";
     obsPlanTable2 = $('#obs-plan-table2').DataTable({
       serverSide: true,
       "deferRender": true,
@@ -44,7 +44,9 @@ $(function() {
         {"data": "op_sn"},
         {"data": "obs_type"},
         {"data": "begin_time"},
-        {"data": "end_time"}
+        {"data": "end_time"},
+        {"data": "execute_status"},
+        {"data": "ctime"} 
       ],
       "columnDefs": [{
           "targets": 0,
@@ -54,6 +56,10 @@ $(function() {
           "targets": 2,
           "data": "ID?",
           "render": formateMode
+        },{
+          "targets": 5,
+          "data": "ID?",
+          "render": formateStatus
         }],
       "language": {
         "lengthMenu": '显示 <select>' +
@@ -76,7 +82,7 @@ $(function() {
   }
 
   function loadObsPlanList() {
-    var queryUrl = $("#getUnDonePlanForm").attr('action') + "?executeStatus=begin";
+    var queryUrl = $("#getUnDonePlanForm").attr('action') + "?executeStatus=undo";
     obsPlanTable = $('#obs-plan-table').DataTable({
       serverSide: true,
       "deferRender": true,
@@ -100,7 +106,9 @@ $(function() {
         {"data": "op_sn"},
         {"data": "obs_type"},
         {"data": "begin_time"},
-        {"data": "end_time"}
+        {"data": "end_time"},
+        {"data": "execute_status"},
+        {"data": "ctime"}
       ],
       "columnDefs": [{
           "targets": 0,
@@ -110,6 +118,10 @@ $(function() {
           "targets": 2,
           "data": "ID?",
           "render": formateMode
+        },{
+          "targets": 5,
+          "data": "ID?",
+          "render": formateStatus
         }],
       "language": {
         "lengthMenu": '显示 <select>' +
@@ -140,6 +152,16 @@ $(function() {
     var rst='引导跟踪';
     if(data===2){
       rst='定点指向';
+    }
+    return rst;
+  }
+
+  function formateStatus(data, type, full, meta) {
+    var rst='未执行';
+    if(data==='begin'){
+      rst='正在执行';
+    }else if(data==='over'){
+      rst='执行完成';
     }
     return rst;
   }

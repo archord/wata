@@ -29,7 +29,7 @@
     <div style="display: none;">
       <input type="hidden" id="gwacRootURL" value="${pageContext.request.contextPath}"/>
     </div>      
-    <div id="tabs-monitor-table-div" style="width:100%; height:100%;margin:0 auto;border:0;">
+    <div id="tabs-monitor-table-div" style="width:95%; height:100%;margin:0 auto;border:0;">
       <div style="width:100%; text-align: center; margin-top: 20px;">
         <form action="${pageContext.request.contextPath}/get-observation-plan-list.action" id="getUnDonePlanForm" method="post">
           <span style="font-size: 18px">待执行观测计划列表&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -40,14 +40,14 @@
         </form>
       </div>
       <div id="ot-list">
-        <table id="obs-plan-table" class="display" cellspacing="0" width="98%">
-          <thead><tr><th>1</th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th></tr></thead>
+        <table id="obs-plan-table" class="display" cellspacing="0" width="100%">
+          <thead><tr><th></th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th><th>执行状态</th><th>执行时间</th></tr></thead>
 
-          <tfoot><tr><th>1</th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th></tr></tfoot>
+          <tfoot><tr><th></th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th><th>执行状态</th><th>执行时间</th></tr></tfoot>
         </table>
       </div>  
     </div>
-    <div id="tabs-monitor-table-div2" style="width:100%; height:100%;margin:0 auto;border:0;">
+    <div id="tabs-monitor-table-div2" style="width:95%; height:100%;margin:0 auto;border:0;">
       <div style="width:100%; text-align: center;">
         <form action="${pageContext.request.contextPath}/get-observation-plan-list.action" id="getDonePlanForm" method="post">
           <span style="font-size: 18px">已执行观测计划列表&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -57,11 +57,11 @@
           </select>
         </form>
       </div>
-      <div id="ot-list2">
-        <table id="obs-plan-table2" class="display" cellspacing="0" width="98%">
-          <thead><tr><th>1</th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th></tr></thead>
+      <div id="ot-list">
+        <table id="obs-plan-table2" class="display" cellspacing="0" width="100%">
+          <thead><tr><th></th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th><th>执行状态</th><th>执行时间</th></tr></thead>
 
-          <tfoot><tr><th>1</th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th></tr></tfoot>
+          <tfoot><tr><th></th><th>计划编号</th><th>计划类型</th><th>开始时间</th><th>结束时间</th><th>执行状态</th><th>执行时间</th></tr></tfoot>
         </table>
       </div>  
     </div>

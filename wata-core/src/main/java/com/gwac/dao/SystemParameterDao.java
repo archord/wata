@@ -4,13 +4,11 @@
  */
 package com.gwac.dao;
 
-import com.gwac.model.Rainfall;
+import com.gwac.model.SystemParameter;
 
 /**
  *
  * @author xy
  */
-public interface RainfallDao extends BaseHibernateDao<Rainfall> {
-  
-  public Rainfall getLatestRecord();
+public interface SystemParameterDao extends BaseHibernateDao<SystemParameter> {
 }
