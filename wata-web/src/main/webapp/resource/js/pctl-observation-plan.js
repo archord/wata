@@ -149,9 +149,13 @@ $(function() {
 
   /*full: json对象；meta：表格元素*/
   function formateMode(data, type, full, meta) {
-    var rst='引导跟踪';
-    if(data===2){
+    var rst='';
+    if(data===1){
+      rst='引导跟踪';
+    }else if(data===2){
       rst='定点指向';
+    }else if(data===3){
+      rst='高轨扫描';
     }
     return rst;
   }

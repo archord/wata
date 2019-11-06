@@ -11,17 +11,23 @@ package com.gwac.action;
 import com.gwac.activemq.RegOrigImageMessageCreator;
 import com.gwac.util.CommonFunction;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.jms.Destination;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.ApplicationAware;
+import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
@@ -44,6 +50,10 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
   private String genTime; //yyyyMMddHHmmss
   private String microSecond;
 
+  private List<File> fileUpload = new ArrayList<>();
+  private List<String> fileUploadContentType = new ArrayList<>();
+  private List<String> fileUploadFileName = new ArrayList<>();
+
   @Resource
   private JmsTemplate jmsTemplate;
   @Resource(name = "regOrigImageDest")
@@ -59,20 +69,56 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
 
     echo = "";
 
-    // || genTime.length() != "yyyy-MM-ddTHH:mm:ss.SSSSSS".length()
-    if (camId == null || camId.isEmpty() ||  imgName == null || imgName.isEmpty()
-            || imgPath == null || imgPath.isEmpty() || genTime == null || genTime.isEmpty()) {
+    try {
+      // || genTime.length() != "yyyy-MM-ddTHH:mm:ss.SSSSSS".length()
+      if (camId == null || camId.isEmpty() || imgName == null || imgName.isEmpty()
+	      || imgPath == null || imgPath.isEmpty() || genTime == null || genTime.isEmpty()) {
 //      echo = "all parameter cannot be empty, and genTime must formated as 'yyyy-MM-ddTHH:mm:ss.SSSSSS'.";
-      echo = "all parameter cannot be empty.";
-      log.warn(echo);
-      log.warn("camId:" + camId + ", imgName:" + imgName + ", imgPath:" + imgPath + ", genTime:" + genTime + ", microSecond:" + microSecond);
-    } else {
-      initObjType();
-      MessageCreator tmc = new RegOrigImageMessageCreator(groupId, unitId, camId, gridId, fieldId, imgName, imgPath, genTime, microSecond, dateStr);
-      jmsTemplate.send(msgDest, tmc);
-      echo = "register image success.";
-      log.debug(echo);
+	echo = "all parameter cannot be empty.";
+	log.warn(echo);
+	log.warn("camId:" + camId + ", imgName:" + imgName + ", imgPath:" + imgPath + ", genTime:" + genTime + ", microSecond:" + microSecond);
+      } else {
+	initObjType();
+	MessageCreator tmc = new RegOrigImageMessageCreator(groupId, unitId, camId, gridId, fieldId, imgName, imgPath, genTime, microSecond, dateStr);
+	jmsTemplate.send(msgDest, tmc);
+	echo = "register image success.";
+	log.debug(echo);
 
+	String rootPath = getText("gwacDataRootDirectory");
+	String origFitsDir = getText("gwacOrigFits");
+	String dateStr = genTime.substring(0, 9);
+	if (rootPath.charAt(rootPath.length() - 1) != '/') {
+	  rootPath += "/";
+	}
+	String storePath = rootPath + origFitsDir + "/" + dateStr + "/G" + camId;
+
+	int i = 0;
+	for (File file : fileUpload) {
+	  String tfilename = fileUploadFileName.get(i++).trim();
+	  if (tfilename.isEmpty()) {
+	    continue;
+	  }
+	  log.debug("receive file " + tfilename);
+	  File destFile = new File(storePath, tfilename);
+	  //如果存在，必须删除，否则FileUtils.moveFile报错FileExistsException
+	  try {
+	    if (destFile.exists()) {
+	      log.warn(destFile + " already exist, delete it.");
+	      FileUtils.forceDelete(destFile);
+	    }
+	    FileUtils.moveFile(file, destFile);
+	  } catch (IOException ex) {
+	    log.error("delete or move file errror ", ex);
+	  }
+	}
+      }
+
+    } catch (JmsException ex) {
+      echo="Reg orig image error";
+      log.error("send message error", ex);
+    } catch (Exception ex) {
+      echo="Reg orig image error";
+      log.error("reg fits image error", ex);
     }
 
     sendResultMsg(echo);
@@ -172,6 +218,27 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
    */
   public void setMicroSecond(String microSecond) {
     this.microSecond = microSecond;
+  }
+
+  /**
+   * @param fileUpload the fileUpload to set
+   */
+  public void setFileUpload(List<File> fileUpload) {
+    this.fileUpload = fileUpload;
+  }
+
+  /**
+   * @param fileUploadContentType the fileUploadContentType to set
+   */
+  public void setFileUploadContentType(List<String> fileUploadContentType) {
+    this.fileUploadContentType = fileUploadContentType;
+  }
+
+  /**
+   * @param fileUploadFileName the fileUploadFileName to set
+   */
+  public void setFileUploadFileName(List<String> fileUploadFileName) {
+    this.fileUploadFileName = fileUploadFileName;
   }
 
 }

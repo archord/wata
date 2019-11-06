@@ -54,6 +54,15 @@ public class UploadMountState extends ActionSupport {
   public void upload() {
 
     echo = "";
+    log.debug("gid:" + gid);
+    log.debug("uid:" + uid);
+    log.debug("ctime:" + ctime);
+    log.debug("state:" + state);
+    log.debug("errcode:" + errcode);
+    log.debug("ra:" + ra);
+    log.debug("dec:" + dec);
+    log.debug("azi:" + azi);
+    log.debug("alt:" + alt);
 
     if (null != gid && !gid.isEmpty() && null != uid && !uid.isEmpty()) {
       Mount mount = dao1.getByGroupUnitId(gid, uid);

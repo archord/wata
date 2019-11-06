@@ -72,7 +72,7 @@ public class UploadObservationPlan extends ActionSupport {
 
     ObservationPlan obsPlan = new ObservationPlan();
     if (null != opSn && !opSn.isEmpty()) {
-      obsPlan.setOpSn(Long.parseLong(opSn));
+      obsPlan.setOpSn(Long.parseLong(opSn.trim()));
     }
     if (null != ra && !ra.isEmpty()) {
       obsPlan.setRa(Float.parseFloat(ra));
@@ -113,12 +113,12 @@ public class UploadObservationPlan extends ActionSupport {
     obsPlan.setImgType(imgType);
     obsPlan.setObjError(objError);
     obsPlan.setObjId(objId);
-    obsPlan.setObsType(obsType);
+    obsPlan.setObsType(obsType.trim());
     obsPlan.setOpType(opType); //???
     obsPlan.setUnitId(unitId);
 
     if (null != beginTime && !beginTime.isEmpty()) {
-      beginTime = beginTime.replace("T", " ");
+      beginTime = beginTime.trim().replace("T", " ");
       Date tdate = null;
       if (beginTime.length() > dateFormateString1.length()) {
         beginTime = beginTime.substring(0, dateFormateString1.length());
@@ -131,7 +131,7 @@ public class UploadObservationPlan extends ActionSupport {
       obsPlan.setBeginTime(tdate);
     }
     if (null != endTime && !endTime.isEmpty()) {
-      endTime = endTime.replace("T", " ");
+      endTime = endTime.trim().replace("T", " ");
       Date tdate = null;
       if (endTime.length() > dateFormateString1.length()) {
         endTime = endTime.substring(0, dateFormateString1.length());
@@ -144,7 +144,7 @@ public class UploadObservationPlan extends ActionSupport {
       obsPlan.setEndTime(tdate);
     }
     if (null != opTime && !opTime.isEmpty()) {
-      opTime = opTime.replace("T", " ");
+      opTime = opTime.trim().replace("T", " ");
       Date tdate = null;
       if (opTime.length() > dateFormateString1.length()) {
         opTime = opTime.substring(0, dateFormateString1.length());

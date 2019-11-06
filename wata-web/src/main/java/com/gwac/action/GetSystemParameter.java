@@ -48,7 +48,7 @@ public class GetSystemParameter extends ActionSupport {
 
     log.debug("get SystemParameter");
     systemParameter = systemParameterDao.getById((long)0);
-    camera = cameraDao.getByName("001", "001", "001");
+    camera = cameraDao.getByName("001", "001", "011");
     dome = domeDao.getByName("001");
     mount = mountDao.getByGroupUnitId("001", "001");
     rainfall = rainfallDao.getLatestRecord();

@@ -40,11 +40,14 @@ public class UpdateMountLinked extends ActionSupport {
   @Action(value = "updateMountLinked")
   public void upload() {
 
+    log.debug("gid:" + gid);
+    log.debug("uid:" + uid);
+    log.debug("linked:" + linked);
     echo = "";
 
     if (null != gid && !gid.isEmpty() && null != uid && !uid.isEmpty()) {
       Integer tval = 0;
-      if (linked!=null && linked.equals("true")) {
+      if (linked!=null && linked.equals("1")) {
 	tval = 1;
       }
       dao.updateLinked(gid, uid, tval);

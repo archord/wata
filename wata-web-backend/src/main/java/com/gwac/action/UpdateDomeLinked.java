@@ -40,10 +40,12 @@ public class UpdateDomeLinked extends ActionSupport {
   public void upload() {
 
     echo = "";
+    log.debug("gid:" + gid);
+    log.debug("linked:" + linked);
 
     if (null != gid && !gid.isEmpty()) {
       Integer tval = 0;
-      if (linked!=null&&linked.equals("true")) {
+      if (linked!=null&&linked.equals("1")) {
 	tval = 1;
       }
       dao.updateDomeLinked(gid, tval);

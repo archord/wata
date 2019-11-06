@@ -84,11 +84,11 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="cameraState">正常</h3></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="cameraError"></h3></div>
                             </div>
-                            <div class="row">
+<!--                            <div class="row">
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3>镜盖</h3></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:#0e0" id="coverState">正常</h3></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="coverError"></h3></div>
-                            </div>
+                            </div>-->
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3><input type="button" value="开始观测" class="btn btn-primary" id="startBtn" style="font-size: 20px"/></h3></div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 "><h3><input type="button" value="停止观测" class="btn btn-primary" id="stopBtn" style="font-size: 20px"/></h3></div>
@@ -128,14 +128,21 @@
                 console.log("server error");
               }
               function onDataReceived(result) {
-//                console.log(result);
+                console.log(result);
                 camera = result.camera;
                 dome = result.dome;
                 mount = result.mount;
                 rainfall = result.rainfall;
                 systemParameter = result.systemParameter;
 
-                $('#rainState').html(rainfall.value + "毫米");
+                //$('#rainState').html(rainfall.value + "毫米");
+                if(rainfall.value>0.5){
+                    $('#rainState').html("有雨");
+                    $('#rainState').css("color", "red");
+                }else{
+                    $('#rainState').html("无雨");
+                    $('#rainState').css("color", "#0e0");
+                }
                 $('#rainState').attr("title", rainfall.ctime.replace("T", " "));
                 $('#yuntuTime').html(systemParameter.latestClouldImageTime.replace("T", " "));
 
@@ -154,13 +161,13 @@
                   } else if (tstate === 3) {
                     showStr = '完成零点搜索';
                   } else if (tstate === 4) {
-                    showStr = '指向复位位置';
+                    showStr = '复位中';
                   } else if (tstate === 5) {
-                    showStr = '到达复位位置';
+                    showStr = '复位';
                   } else if (tstate === 6) {
-                    showStr = '指向目标位置';
+                    showStr = '指向';
                   } else if (tstate === 7) {
-                    showStr = '跟踪目标或轨迹';
+                    showStr = '跟踪';
                   }
                   if (mount.state === 0) {
                     $('#mountError').html("错误码:" + mount.errcode);
@@ -183,7 +190,7 @@
                   } else if (tstate === 1) {
                     showStr = '空闲';
                   } else if (tstate === 2) {
-                    showStr = '正在曝光';
+                    showStr = '曝光中';
                   } else if (tstate === 3) {
                     showStr = '完成曝光';
                   } else if (tstate === 4) {
@@ -191,11 +198,11 @@
                   } else if (tstate === 5) {
                     showStr = '暂停曝光';
                   } else if (tstate === 6) {
-                    showStr = '曝光前延时等待';
+                    showStr = '延时等待';
                   } else if (tstate === 7) {
-                    showStr = '平场采集失败，等待新的曝光控制指令';
+                    showStr = '等待同步信号';
                   } else if (tstate === 8) {
-                    showStr = '平场模式等待转台重新定位';
+                    showStr = '平场重定位';
                   }
                   if (tstate === 0) {
                     $('#cameraError').html("错误码:" + camera.errcode);
@@ -235,33 +242,33 @@
                   $('#domeState').attr("title", dome.ctime.replace("T", " "));
                 }
 
-                if (camera.coverLinked === 0) {
-                  $('#coverState').html("未连接");
-                  $('#coverState').css("color", "red");
-                } else {
-                  var tstate = camera.coverStatus;
-                  var showStr = '';
-                  if (tstate === 0) {
-                    showStr = '错误';
-                  } else if (tstate === 1) {
-                    showStr = '正在打开';
-                  } else if (tstate === 2) {
-                    showStr = '已打开';
-                  } else if (tstate === 3) {
-                    showStr = '正在关闭';
-                  } else if (tstate === 4) {
-                    showStr = '已关闭';
-                  }
-                  if (tstate === 0) {
-                    $('#coverError').html("错误码:" + camera.cameraCoverErrcode);
-                    $('#coverState').css("color", "red");
-                  } else {
-                    $('#coverError').html("");
-                    $('#coverState').css("color", "#0e0");
-                  }
-                  $('#coverState').html(showStr);
-                  $('#coverState').attr("title", camera.cameraCoverUtc.replace("T", " "));
-                }
+//                if (camera.coverLinked === 0) {
+//                  $('#coverState').html("未连接");
+//                  $('#coverState').css("color", "red");
+//                } else {
+//                  var tstate = camera.coverStatus;
+//                  var showStr = '';
+//                  if (tstate === 0) {
+//                    showStr = '错误';
+//                  } else if (tstate === 1) {
+//                    showStr = '正在打开';
+//                  } else if (tstate === 2) {
+//                    showStr = '已打开';
+//                  } else if (tstate === 3) {
+//                    showStr = '正在关闭';
+//                  } else if (tstate === 4) {
+//                    showStr = '已关闭';
+//                  }
+//                  if (tstate === 0) {
+//                    $('#coverError').html("错误码:" + camera.cameraCoverErrcode);
+//                    $('#coverState').css("color", "red");
+//                  } else {
+//                    $('#coverError').html("");
+//                    $('#coverState').css("color", "#0e0");
+//                  }
+//                  $('#coverState').html(showStr);
+//                  $('#coverState').attr("title", camera.cameraCoverUtc.replace("T", " "));
+//                }
 
               }
 

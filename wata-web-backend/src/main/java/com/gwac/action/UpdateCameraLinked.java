@@ -42,10 +42,14 @@ public class UpdateCameraLinked extends ActionSupport {
   public void upload() {
 
     echo = "";
+    log.debug("gid:" + gid);
+    log.debug("uid:" + uid);
+    log.debug("cid:" + cid);
+    log.debug("linked:" + linked);
 
     if (null != gid && !gid.isEmpty() && null != uid && !uid.isEmpty() && null != cid && !cid.isEmpty()) {
       Integer tval = 0;
-      if (linked!=null&&linked.equals("true")) {
+      if (linked!=null&&linked.equals("1")) {
 	tval = 1;
       }
       dao.updateLinked(gid, uid, cid, tval);
