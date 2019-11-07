@@ -50,7 +50,11 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
 //    if (unitId != null && !unitId.isEmpty()) {
 //      sql += "and unit_id='" + unitId + "' ";
 //    }
-    sql += "ORDER BY begin_time desc OFFSET " + start + " LIMIT " + length + " )as tmp1";
+    sql += "ORDER BY begin_time desc ";
+    if(length>0){
+      sql += " OFFSET " + start + " LIMIT " + length + " ";
+    }
+      sql += " )as tmp1";
 
     //log.debug(sql);
     String rst = "";

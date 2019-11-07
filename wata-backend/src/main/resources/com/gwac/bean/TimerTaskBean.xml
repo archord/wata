@@ -3,202 +3,25 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-  <!-- Spring Quartz -->
-  <!--bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
-      <property name="jobClass" value="com.mkyong.common.RunMeJob" />
-      <property name="jobDataAsMap">
-        <map>
-          <entry key="runMeTask" value-ref="runMeTask" />
-        </map>
-      </property>
-  </bean-->
-  
-  <bean id="ot2ReFollowUpJob" 
+  <bean id="checkImageJob" 
         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="ot2ReFollowUP" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  
-  <bean id="findMoveObjectJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="findMoveObjectService" /> 
+    <property name="targetObject" ref="imageCheckService" /> 
     <property name="targetMethod" value="startJob" /> 
     <property name="concurrent" value="false" />
   </bean> 
   
-  <bean id="otTmplJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="otTmplService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-  
-  <bean id="followUpRecordJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="followUpRecordService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-  
-  <bean id="followUpObservationJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="fuoTriggerService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-  
-  <bean id="imageStatusParmJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="imageStatusParmService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  <bean id="addMissedCutImageJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="fitsFileCutService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  <bean id="moveDataToHisJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="dataBackupService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  <bean id="fileTransferJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="fileTransferService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  <bean id="dataSyncJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="dataSyncService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  <bean id="monitorImageSyncJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="monitorImageSyncService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-
-  <bean id="otObsRecordJob" 
-        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
-    <property name="targetObject" ref="otObserveRecordService" /> 
-    <property name="targetMethod" value="startJob" /> 
-    <property name="concurrent" value="false" />
-  </bean> 
-  
-  <bean id="ot2ReFollowUpTrigger" 
+  <bean id="checkImageTrigger" 
         class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="ot2ReFollowUpJob" />
-    <property name="repeatInterval" value="15000" />  
-    <property name="startDelay" value="20000" />   
-  </bean>
-  
-  <bean id="otObsRecordTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="otObsRecordJob" />
-    <property name="repeatInterval" value="150000000000" />  
-    <property name="startDelay" value="5000" />   
-  </bean>
-    
-  <bean id="followUpRecordTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="followUpRecordJob" />
-    <property name="repeatInterval" value="15000" />  
-    <property name="startDelay" value="5000" />   
-  </bean>
-  
-  <bean id="followUpObservationTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="followUpObservationJob" />
-    <property name="repeatInterval" value="120000" />  
-    <property name="startDelay" value="10000" />   
-  </bean>
-    
-  <bean id="findMoveObjectTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="findMoveObjectJob" />
-    <property name="repeatInterval" value="15000" />  
-    <property name="startDelay" value="5000" />   
-  </bean>
-  
-  <!-- 13点40 -->
-<!--  <bean id="findMoveObjectTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-    <property name="jobDetail" ref="findMoveObjectJob" />
-    <property name="cronExpression" value="0 40 13 * * ?"/>  40 13 
-  </bean>-->
-
-  <!-- Simple Trigger, run every 15 seconds -->
-  <bean id="imageStatusParmTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="imageStatusParmJob" />
-    <property name="repeatInterval" value="5000" /> <!-- 5000  15000-->
-    <property name="startDelay" value="10000" />  <!-- 10000  -->
-  </bean>
-  
-  <bean id="addMissedCutImageTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="addMissedCutImageJob" />
-    <property name="repeatInterval" value="15000" /> <!-- 15000  -->
-    <property name="startDelay" value="16000" /> <!-- 17500  -->
-  </bean>
-  
-  <bean id="dataSyncTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-    <property name="jobDetail" ref="dataSyncJob" />
-    <property name="cronExpression" value="0/5 * 0-5,14-23 * * ?"/> <!-- 50 16 -->
-  </bean>
-  
-  <bean id="monitorImageSyncTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-    <property name="jobDetail" ref="monitorImageSyncJob" />
-    <property name="cronExpression" value="0 0/5 0-5,17-23 * * ?"/> <!-- 50 16 -->
-  </bean>
-  
-  <bean id="fileTransferTrigger" 
-        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-    <property name="jobDetail" ref="fileTransferJob" />
-    <property name="repeatInterval" value="15000" /> <!-- 60000   -->
+    <property name="jobDetail" ref="checkImageJob" />
+    <property name="repeatInterval" value="10000" /> <!-- 60000   -->
     <property name="startDelay" value="20000" /> <!-- 20000  -->
   </bean>
 
-  <!-- Cron Trigger, every day 16:50 -->
-  <!-- 秒，分，时，月的某天，月，星期的某天，年；其中年不是必须的，也就是说任何一个表达式最少需要六项 -->
-  <bean id="moveDataToHisTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-    <property name="jobDetail" ref="moveDataToHisJob" />
-    <property name="cronExpression" value="0 50 16 * * ?"/> <!-- 50 16 -->
-  </bean>
-  
-  <bean id="otTmplTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-    <property name="jobDetail" ref="otTmplJob" />
-    <property name="cronExpression" value="0 00 13 * * ?"/>
-  </bean>
 
   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
       <list>
-        <ref bean="imageStatusParmTrigger" />
-        <ref bean="addMissedCutImageTrigger" />
-        <ref bean="moveDataToHisTrigger" />
-        <!--<ref bean="followUpRecordTrigger" />-->
-        <ref bean="followUpObservationTrigger" />
-        <ref bean="otTmplTrigger" />
-        <!--<ref bean="findMoveObjectTrigger" />-->
-        <ref bean="ot2ReFollowUpTrigger" />
-        
-        <!--<ref bean="ot2CheckTrigger" />-->
-        
-        <!--<ref bean="fileTransferTrigger" />-->
-        <!--<ref bean="dataSyncTrigger" />-->
-        <!--<ref bean="monitorImageSyncTrigger" />-->
+        <ref bean="checkImageTrigger" />
       </list>
     </property>
   </bean>

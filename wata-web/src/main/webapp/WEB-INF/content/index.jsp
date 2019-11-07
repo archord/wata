@@ -53,8 +53,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 ">
-                                    <a href="<%=request.getContextPath()%>/resource/images/yuntu.jpg">
-                                        <img src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 100px; "/></a>
+                                    <a id="yuntuA" href="<%=request.getContextPath()%>/resource/images/yuntu.jpg">
+                                        <img id="yumtuImg" src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 100px; "/></a>
                                 </div>
                             </div>
                         </div>
@@ -145,6 +145,9 @@
                 }
                 $('#rainState').attr("title", rainfall.ctime.replace("T", " "));
                 $('#yuntuTime').html(systemParameter.latestClouldImageTime.replace("T", " "));
+                var yuntuUrl = "/images/"+systemParameter.clouldImagePath+"/"+systemParameter.latestClouldImage + "?timestamp=" + new Date().getTime();
+                $('#yumtuImg').attr("src", yuntuUrl);
+                $('#yumtuA').attr("href", yuntuUrl);
 
                 if (mount.linked === 0) {
                   $('#mountState').html("未连接");

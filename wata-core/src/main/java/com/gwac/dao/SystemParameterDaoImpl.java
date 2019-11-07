@@ -32,4 +32,17 @@ public class SystemParameterDaoImpl extends BaseHibernateDaoImpl<SystemParameter
     
     query.executeUpdate();
   }
+  
+  @Override
+  public void updateYuntu(SystemParameter sp){
+    
+    Session session = getCurrentSession();
+    String sql = "update system_parameter set latest_clould_image=?, latest_clould_image_time=? where sp_id=?";
+    SQLQuery query = session.createSQLQuery(sql);
+    query.setString(0, sp.getLatestClouldImage());
+    query.setTimestamp(1, sp.getLatestClouldImageTime());
+    query.setLong(2, sp.getSpId());
+    
+    query.executeUpdate();
+  }
 }

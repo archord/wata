@@ -12,4 +12,5 @@ import com.gwac.model.SystemParameter;
  */
 public interface SystemParameterDao extends BaseHibernateDao<SystemParameter> {
   public void updateControlServerIpPort(SystemParameter sp);
+  public void updateYuntu(SystemParameter sp);
 }

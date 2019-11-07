@@ -129,6 +129,7 @@ public class SystemParameter implements java.io.Serializable {
    * @return the monitorImageTime
    */
   @Column(name = "latest_clould_image_time")
+  @Temporal(javax.persistence.TemporalType.TIMESTAMP)
   public Date getLatestClouldImageTime() {
     return latestClouldImageTime;
   }

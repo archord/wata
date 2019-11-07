@@ -79,10 +79,6 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
 	log.warn("camId:" + camId + ", imgName:" + imgName + ", imgPath:" + imgPath + ", genTime:" + genTime + ", microSecond:" + microSecond);
       } else {
 	initObjType();
-	MessageCreator tmc = new RegOrigImageMessageCreator(groupId, unitId, camId, gridId, fieldId, imgName, imgPath, genTime, microSecond, dateStr);
-	jmsTemplate.send(msgDest, tmc);
-	echo = "register image success.";
-	log.debug(echo);
 
 	String rootPath = getText("gwacDataRootDirectory");
 	String origFitsDir = getText("gwacOrigFits");
@@ -111,6 +107,11 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
 	    log.error("delete or move file errror ", ex);
 	  }
 	}
+	
+	MessageCreator tmc = new RegOrigImageMessageCreator(groupId, unitId, camId, gridId, fieldId, imgName, storePath, genTime, microSecond, dateStr);
+	jmsTemplate.send(msgDest, tmc);
+	echo = "register image success.";
+	log.debug(echo);
       }
 
     } catch (JmsException ex) {
