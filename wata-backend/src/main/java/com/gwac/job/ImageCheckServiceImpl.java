@@ -95,16 +95,16 @@ public class ImageCheckServiceImpl implements BaseService {
 	  }
 	}
       }
-      System.out.println("get latest image: "+latestFileName);
+//      System.out.println("get latest image: "+latestFileName);
       String dateStr = latestFileName.substring(4, 24).replace("__", " ");
-      System.out.println(dateStr);
+//      System.out.println(dateStr);
       Date td = CommonFunction.stringToDate(dateStr, "yyyy-MM-dd HH-mm-ss");
-      System.out.println(td);
+//      System.out.println(td);
       SystemParameter sp = new SystemParameter();
       sp.setSpId(0);
       sp.setLatestClouldImage(latestFileName);
       sp.setLatestClouldImageTime(td);
-      System.out.println(sp.getLatestClouldImageTime());
+//      System.out.println(sp.getLatestClouldImageTime());
       sysParmDao.updateYuntu(sp);
       
     } catch (Exception ex) {
