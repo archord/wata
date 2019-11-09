@@ -34,7 +34,8 @@
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-download.action" target="_blank">目标下载</a></li>
                 <li><a href="<%=request.getContextPath()%>/monitor/pgwac-parm-monitor.action" target="_blank">目标查看</a></li>
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-timesequence-sphere-debug.action" target="_blank">目标3D展示</a></li>
-                <!--<li><a href="<%=request.getContextPath()%>/gwac/pgwac-ccd-image-realtime.action" target="_blank">图像预览</a></li>-->
+                <li><a href="<%=request.getContextPath()%>/gwac/pgwac-ccd-image-realtime.action" target="_blank">图像预览</a></li>
+                <li><a href="#" target="_blank">夜天光</a></li>
                 <li><a href="<%=request.getContextPath()%>/followup/followup-parm.action" target="_blank">系统参数配置</a></li>
                 <li><a href="<%=request.getContextPath()%>/user-logout.action">退出</a></li>
             </ul>
@@ -121,6 +122,7 @@
 
               var requestTime = 5000;
               var dataurl = "<%=request.getContextPath()%>/get-system-parameter.action";
+              $.ajax({url: dataurl, type: "GET", success: onDataReceived, error: errorLog});
               setInterval(function(){
                 $.ajax({url: dataurl, type: "GET", success: onDataReceived, error: errorLog});
               }, requestTime);
@@ -233,6 +235,10 @@
                     showStr = '正在关闭';
                   } else if (tstate === 4) {
                     showStr = '已关闭';
+                  } else if (tstate === 5) {
+                    showStr = '半开后静止';
+                  }else{
+                      showStr = tstate;
                   }
                   if (tstate === 0) {
                     $('#domeError').html("错误码:" + dome.errcode);

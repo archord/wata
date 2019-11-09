@@ -82,7 +82,7 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
 
 	String rootPath = getText("gwacDataRootDirectory");
 	String origFitsDir = getText("gwacOrigFits");
-	String dateStr = genTime.substring(0, 9);
+	String dateStr = genTime.substring(0, 8);
 	if (rootPath.charAt(rootPath.length() - 1) != '/') {
 	  rootPath += "/";
 	}

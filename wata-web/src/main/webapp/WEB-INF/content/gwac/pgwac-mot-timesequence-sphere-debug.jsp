@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>OT分布实时概览图-天球坐标</title>
+    <title>移动目标分布实时概览图-天球坐标</title>
     <link type="image/x-icon" rel="shortcut icon" href="${pageContext.request.contextPath}/resource/sysimg/favicon.ico"/>
     <script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/resource/js/plot/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/resource/js/d3/d3.min.js"></script>

@@ -4,20 +4,8 @@
  */
 package com.gwac.job;
 
-import com.gwac.dao.CameraDao;
-import com.gwac.dao.CcdPixFilterDao;
-import com.gwac.dao.ConfigFileDao;
-import com.gwac.dao.DataProcessMachineDAO;
 import com.gwac.dao.FitsFile2DAO;
-import com.gwac.dao.FitsFileCutDAO;
-import com.gwac.dao.FitsFileCutRefDAO;
-import com.gwac.dao.ImageStatusParameterDao;
-import com.gwac.dao.Ot2StreamNodeTimeDao;
-import com.gwac.dao.OtLevel2Dao;
-import com.gwac.dao.OtObserveRecordDAO;
 import com.gwac.dao.SystemParameterDao;
-import com.gwac.dao.UploadFileUnstoreDao;
-import com.gwac.dao.WebGlobalParameterDao;
 import com.gwac.model.SystemParameter;
 import com.gwac.util.CommonFunction;
 import java.io.File;

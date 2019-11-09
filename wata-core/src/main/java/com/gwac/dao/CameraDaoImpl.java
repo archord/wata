@@ -132,7 +132,7 @@ public class CameraDaoImpl extends BaseHibernateDaoImpl<Camera> implements Camer
   @Override
   public Camera getByName(String name) {
     Session session = getCurrentSession();
-    String sql = "select * from camera where name='" + name + "';";
+    String sql = "select * from camera where cid='" + name + "';";
     Query q = session.createSQLQuery(sql).addEntity(Camera.class);
     if (!q.list().isEmpty()) {
       return (Camera) q.list().get(0);

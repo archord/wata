@@ -17,11 +17,25 @@
     <property name="startDelay" value="20000" /> <!-- 20000  -->
   </bean>
 
+  <bean id="stampGenerateJob" 
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+    <property name="targetObject" ref="stampGenerateService" /> 
+    <property name="targetMethod" value="startJob" /> 
+    <property name="concurrent" value="false" />
+  </bean> 
+  
+  <bean id="stampGenerateTrigger" 
+        class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+    <property name="jobDetail" ref="stampGenerateJob" />
+    <property name="repeatInterval" value="30000" /> <!-- 60000   -->
+    <property name="startDelay" value="10000" /> <!-- 20000  -->
+  </bean>
 
   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
       <list>
         <ref bean="checkImageTrigger" />
+        <ref bean="stampGenerateTrigger" />
       </list>
     </property>
   </bean>
