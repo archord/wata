@@ -56,7 +56,8 @@ $(function () {
 
     $("#star-light-curve").bind("plothover", function (event, pos, item) {
       if (item) {
-        var x = item.datapoint[0].toFixed(4);
+        //var x = item.datapoint[0].toFixed(4);
+        var x = item.datapoint[2];
         var y = item.datapoint[1].toFixed(2);
         $("#tooltip").html(item.series.label + "(" + x + ", " + y + ")").css({top: item.pageY - 25, left: item.pageX + 10}).fadeIn(200);
       } else {
@@ -81,7 +82,7 @@ $(function () {
       minDate=new Date(minDateNumber);
     }
     
-    $('#startDay').html(minDate);
+    $('#startDay').html(minDate.toISOString());
     var objList = [];
     $.each(data, function (i, item) {
       if(item['dateObj']>=minDateNumber){
@@ -101,7 +102,7 @@ $(function () {
       var coorShow = [];
       $.each(sortObj, function (j, item2) {
         var minute = (item2['dateObj'] - minDateNumber) / (60000 * 60 * 24);
-        coorShow.push([minute, item2[item.name]]);
+        coorShow.push([minute, item2[item.name], item2['dateStr']]);
       });
       formatedObjList.push({
         label: item.label,
