@@ -24,6 +24,14 @@ import org.springframework.stereotype.Repository;
 public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan> implements ObservationPlanDao {
 
   private static final Log log = LogFactory.getLog(ObservationPlanDaoImpl.class);
+  
+  @Override
+  public void abandonUndo() {
+    Session session = getCurrentSession();
+    String sql = "update observation_plan set execute_status='abandon' where begin_time<timezone('utc', now()) and execute_status is null";
+    SQLQuery query = session.createSQLQuery(sql);
+    query.executeUpdate();
+  }
 
   @Override
   public void updateObservationPlanStatus(ObservationPlanState obj) {
@@ -43,14 +51,14 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
     String sql = "SELECT text(JSON_AGG((SELECT r FROM (SELECT tmp1.*) r))) "
 	    + "from(SELECT sl.* FROM observation_plan sl ";
     if (executeStatus.equalsIgnoreCase("begin") || executeStatus.equalsIgnoreCase("over")) {
-      sql = sql + " where execute_status is not null ";
+      sql = sql + " where execute_status is not null ORDER BY begin_time desc ";
     }else{
-      sql = sql + " where execute_status is null ";
+      sql = sql + " where execute_status is null ORDER BY begin_time asc ";
     }
 //    if (unitId != null && !unitId.isEmpty()) {
 //      sql += "and unit_id='" + unitId + "' ";
 //    }
-    sql += "ORDER BY begin_time desc ";
+//    sql += "ORDER BY begin_time desc ";
     if(length>0){
       sql += " OFFSET " + start + " LIMIT " + length + " ";
     }

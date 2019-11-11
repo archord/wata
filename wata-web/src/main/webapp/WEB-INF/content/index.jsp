@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 ">
                                     <a id="yuntuA" href="<%=request.getContextPath()%>/resource/images/yuntu.jpg">
-                                        <img id="yumtuImg" src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 100px; "/></a>
+                                        <img id="yuntuImg" src="<%=request.getContextPath()%>/resource/images/yuntu.jpg" border="0" style="width:100%;border-radius: 100px; "/></a>
                                 </div>
                             </div>
                         </div>
@@ -148,8 +148,8 @@
                 $('#rainState').attr("title", rainfall.ctime.replace("T", " "));
                 $('#yuntuTime').html(systemParameter.latestClouldImageTime.replace("T", " "));
                 var yuntuUrl = "/images/"+systemParameter.clouldImagePath+"/"+systemParameter.latestClouldImage + "?timestamp=" + new Date().getTime();
-                $('#yumtuImg').attr("src", yuntuUrl);
-                $('#yumtuA').attr("href", yuntuUrl);
+                $('#yuntuImg').attr("src", yuntuUrl);
+                $('#yuntuA').attr("href", yuntuUrl);
 
                 if (mount.linked === 0) {
                   $('#mountState').html("未连接");
@@ -196,17 +196,17 @@
                     showStr = '空闲';
                   } else if (tstate === 2) {
                     showStr = '曝光中';
-                  } else if (tstate === 3) {
-                    showStr = '完成曝光';
                   } else if (tstate === 4) {
-                    showStr = '中止曝光';
-                  } else if (tstate === 5) {
-                    showStr = '暂停曝光';
-                  } else if (tstate === 6) {
-                    showStr = '延时等待';
-                  } else if (tstate === 7) {
-                    showStr = '等待同步信号';
+                    showStr = '完成曝光';
                   } else if (tstate === 8) {
+                    showStr = '中止曝光';
+                  } else if (tstate === 16) {
+                    showStr = '暂停曝光';
+                  } else if (tstate === 32) {
+                    showStr = '延时等待';
+                  } else if (tstate === 64) {
+                    showStr = '等待同步信号';
+                  } else if (tstate === 128) {
                     showStr = '平场重定位';
                   }
                   if (tstate === 0) {

@@ -10,9 +10,7 @@
 
             $(function () {
               var winWidth = $(window).width();
-              console.log(winWidth);
               var winHeight = $(window).height();
-              console.log(winHeight);
               var imgWidth = winHeight - 100;
               var imgHeight = imgWidth;
 

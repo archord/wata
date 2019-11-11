@@ -27,7 +27,7 @@ $(function() {
       "processing": true,
       "searching": false,
       "lengthChange": true,
-      "pageLength": 8,
+      "pageLength": 3,
       "scrollX": true,
       "ajax": {
         url: queryUrl,
@@ -89,7 +89,7 @@ $(function() {
       "processing": true,
       "searching": false,
       "lengthChange": true,
-      "pageLength": 5,
+      "pageLength": 8,
       "scrollX": true,
       "ajax": {
         url: queryUrl,
@@ -125,9 +125,9 @@ $(function() {
         }],
       "language": {
         "lengthMenu": '显示 <select>' +
-                '<option value="5">5</option>' +
                 '<option value="8">8</option>' +
                 '<option value="16">16</option>' +
+                '<option value="32">32</option>' +
                 '<option value="-1">All</option>' +
                 '</select> 条',
         "info": "显示第 _START_ 到 _END_ ，共 _TOTAL_ 条。",
@@ -166,6 +166,8 @@ $(function() {
       rst='正在执行';
     }else if(data==='over'){
       rst='执行完成';
+    }else if(data==='abandon'){
+      rst='跳过';
     }
     return rst;
   }

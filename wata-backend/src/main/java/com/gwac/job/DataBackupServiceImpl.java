@@ -4,19 +4,7 @@
  */
 package com.gwac.job;
 
-import com.gwac.dao.CameraDao;
-import com.gwac.dao.CcdPixFilterDao;
-import com.gwac.dao.ConfigFileDao;
-import com.gwac.dao.DataProcessMachineDAO;
-import com.gwac.dao.FitsFile2DAO;
-import com.gwac.dao.FitsFileCutDAO;
-import com.gwac.dao.FitsFileCutRefDAO;
-import com.gwac.dao.ImageStatusParameterDao;
-import com.gwac.dao.Ot2StreamNodeTimeDao;
-import com.gwac.dao.OtLevel2Dao;
-import com.gwac.dao.OtObserveRecordDAO;
-import com.gwac.dao.UploadFileUnstoreDao;
-import com.gwac.dao.WebGlobalParameterDao;
+import com.gwac.dao.ObservationPlanDao;
 import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,29 +28,7 @@ public class DataBackupServiceImpl implements BaseService {
   private Boolean isTestServer;
 
   @Resource
-  private OtLevel2Dao otlv2Dao;
-  @Resource
-  private FitsFileCutDAO ffcDao;
-  @Resource
-  private OtObserveRecordDAO oorDao;
-  @Resource
-  private ConfigFileDao cfDao;
-  @Resource
-  private ImageStatusParameterDao ispDao;
-  @Resource
-  private CameraDao camDao;
-  @Resource
-  private UploadFileUnstoreDao ufuDao;
-  @Resource
-  private CcdPixFilterDao cpfDao;
-  @Resource
-  private WebGlobalParameterDao webGlobalParameterDao;
-  @Resource
-  private Ot2StreamNodeTimeDao ot2StreamNodeTimeDao;
-  @Resource
-  private FitsFile2DAO ff2Dao;
-  @Resource
-  private FitsFileCutRefDAO ffcrDao;
+  private ObservationPlanDao observationPlanDao;
 
   @Override
   public void startJob() {
@@ -84,18 +50,7 @@ public class DataBackupServiceImpl implements BaseService {
 
     long startTime = System.nanoTime();
     try {//JDBCConnectionException or some other exception
-      ffcrDao.moveDataToHisTable();
-      ff2Dao.moveDataToHisTable();
-      otlv2Dao.moveDataToHisTable();
-      ffcDao.moveDataToHisTable();
-      oorDao.moveDataToHisTable();
-      cfDao.moveDataToHisTable();
-      ispDao.moveDataToHisTable();
-      camDao.everyDayInit();
-      ufuDao.removeAll();
-      cpfDao.removeAll();
-      webGlobalParameterDao.everyDayInit();
-      ot2StreamNodeTimeDao.removeAll();
+      observationPlanDao.abandonUndo();
     } catch (Exception ex) {
       log.error("Job error", ex);
     } finally {

@@ -30,12 +30,25 @@
     <property name="repeatInterval" value="30000" /> <!-- 60000   -->
     <property name="startDelay" value="10000" /> <!-- 20000  -->
   </bean>
-
+  
+  <bean id="dataBackupJob" 
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+    <property name="targetObject" ref="dataBackupService" /> 
+    <property name="targetMethod" value="startJob" /> 
+    <property name="concurrent" value="false" />
+  </bean> 
+  
+  <bean id="dataBackupTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail" ref="dataBackupJob" />
+    <property name="cronExpression" value="0 50 07 * * ?"/> <!-- 50 16 -->
+  </bean>
+  
   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
       <list>
         <ref bean="checkImageTrigger" />
         <ref bean="stampGenerateTrigger" />
+        <ref bean="dataBackupTrigger" />
       </list>
     </property>
   </bean>

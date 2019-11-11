@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface ObservationPlanDao extends BaseHibernateDao<ObservationPlan> {
   
+  public void abandonUndo();
+  
   public void updateObservationPlanStatus(ObservationPlanState obj);
 
   public String findRecord(int start, int length, String unitId, String executeStatus);
