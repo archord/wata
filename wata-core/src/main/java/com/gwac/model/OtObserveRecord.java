@@ -53,6 +53,7 @@ public class OtObserveRecord implements java.io.Serializable {
   private Character dataProduceMethod;
   private Integer timeSubSecond;
   private Float probability;
+  private Integer imageOt1Num;
 
   public OtObserveRecord() {
   }
@@ -390,5 +391,20 @@ public class OtObserveRecord implements java.io.Serializable {
    */
   public void setTimeSubSecond(Integer timeSubSecond) {
     this.timeSubSecond = timeSubSecond;
+  }
+
+  /**
+   * @return the imageOt1Num 
+   */
+  @Column(name = "image_ot1_num")
+  public Integer getImageOt1Num() {
+    return imageOt1Num;
+  }
+
+  /**
+   * @param imageOt1Num the imageOt1Num to set
+   */
+  public void setImageOt1Num(Integer imageOt1Num) {
+    this.imageOt1Num = imageOt1Num;
   }
 }

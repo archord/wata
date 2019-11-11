@@ -107,7 +107,7 @@ public class ObjectCorrelationServiceImpl implements OtObserveRecordService {
 
       for (OTCatalog otc : otcs) {
 	String fitsName = otc.getImageName();
-	String fileDate = fileName.substring(fileName.lastIndexOf('_') + 1, fileName.lastIndexOf('T'));
+	String fileDate = fileName.substring(2, fileName.indexOf('_'));
 	FitsFile2 ff2 = ff2Dao.getByName(fitsName);
 	if (ff2 == null) {
 	  continue;

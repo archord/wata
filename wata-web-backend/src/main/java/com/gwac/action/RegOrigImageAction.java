@@ -107,6 +107,7 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
 	    log.error("delete or move file errror ", ex);
 	  }
 	}
+	Thread.sleep(1000);
 	
 	MessageCreator tmc = new RegOrigImageMessageCreator(groupId, unitId, camId, gridId, fieldId, imgName, storePath, genTime, microSecond, dateStr);
 	jmsTemplate.send(msgDest, tmc);

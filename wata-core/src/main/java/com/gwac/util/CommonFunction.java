@@ -317,13 +317,17 @@ public class CommonFunction {
     int cyi = (int) Math.round(cy);
     int tx = cxi - w / 2;
     int ty = cyi - h / 2;
-    BufferedImage cropImg = src.getSubimage(tx, ty, w, h);
-    BufferedImage result = new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
-    Graphics tg = result.getGraphics();
-    tg.drawImage(cropImg, 0, 0, null);
-    if (labelW > 0) {
-      tg.setColor(new Color(0, 255, 0));
-      tg.drawRect(w / 2 - labelW / 2, h / 2 - labelW / 2, labelW, labelW);
+    
+    BufferedImage result = null;
+    if((cx+w/2<imw-1) && (cy+h/2<imh-1)&&(cx-w/2>1) && (cy-h/2>1)){
+      BufferedImage cropImg = src.getSubimage(tx, ty, w, h);
+      result = new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
+      Graphics tg = result.getGraphics();
+      tg.drawImage(cropImg, 0, 0, null);
+      if (labelW > 0) {
+	tg.setColor(new Color(0, 255, 0));
+	tg.drawRect(w / 2 - labelW / 2, h / 2 - labelW / 2, labelW, labelW);
+      }
     }
     return result;
   }

@@ -9,7 +9,7 @@ $(function () {
   var playSpeed = 1000;
   var imgShowInterval;
   var autoShowRunning = true;
-  
+
   var otCurve;
   var plotOption = {
     legend: {show: false},
@@ -32,37 +32,40 @@ $(function () {
   $('#obsDate').change(clearSelectCamera);
   $('#ccdList').change(changeCCDs);
   $('#objList').change(loadObjectRecords);
-  $('#autoShow').click(function(){
-    if(autoShowRunning===false){
+  $('#autoShow').click(function () {
+    if (autoShowRunning === false) {
       imgShowInterval = setInterval(showImage, playSpeed);
       autoShowRunning = true;
     }
   });
-  
-  function showImage(){
+
+  function showImage() {
     var item = coorShow[showImageIdx];
     var fName = item[6];
     var x1 = item[4];
     var y1 = item[5];
     //console.log(fName);
-    var fullImgUrl = "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
-    var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
-    + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
+    var dateStr00 = fName.substring(fName.indexOf('objt_') + 5, fName.indexOf('T'));
+    var camName00 = fName.substring(0, 4);
+    var imgName00 = fName.substring(0, fName.indexOf('.'));
+    var fullImgUrl = "/images/fits_preview/20" + dateStr00 + "/" + camName00 + "/" + imgName00 + ".jpg";
+    var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + dateStr00 + "/" + camName00 + "/" + imgName00 + ".jpg"
+            + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
     //console.log(fullImgUrl);
     $("#movObjSubImg").attr("src", subImgUrl);
     $("#movObjfullImg").attr("href", fullImgUrl);
-    
-    var highlightIdx=showImageIdx;
-    var unhighlightIdx=highlightIdx-1;
-    if(unhighlightIdx<0){
-      unhighlightIdx=unhighlightIdx+totalImage;
+
+    var highlightIdx = showImageIdx;
+    var unhighlightIdx = highlightIdx - 1;
+    if (unhighlightIdx < 0) {
+      unhighlightIdx = unhighlightIdx + totalImage;
     }
     otCurve.highlight(0, highlightIdx);
     otCurve.unhighlight(0, unhighlightIdx);
-    
-    showImageIdx = showImageIdx+1;
-    showImageIdx=showImageIdx%totalImage;
-    
+
+    showImageIdx = showImageIdx + 1;
+    showImageIdx = showImageIdx % totalImage;
+
   }
 
   function clearSelectCamera() {
@@ -74,11 +77,11 @@ $(function () {
     var getDateStrListJsonUrl = "/get-object-list-json.action";
     var dateStr = $('#obsDate').val();
     var ccdList = $('#ccdList').val();
-    if(dateStr===''){
+    if (dateStr === '') {
       alert('请选择日期');
       return;
     }
-    var queryUrl = gwacRootURL + getDateStrListJsonUrl+"?dateStr="+dateStr+"&camId="+ccdList;
+    var queryUrl = gwacRootURL + getDateStrListJsonUrl + "?dateStr=" + dateStr + "&camId=" + ccdList;
     $.ajax({
       type: "get",
       url: queryUrl,
@@ -101,8 +104,8 @@ $(function () {
   function loadObjectRecords() {
     var movId = $('#objList').val();
     var getDateStrListJsonUrl = "/get-object-records-json.action";
-    var queryUrl = gwacRootURL + getDateStrListJsonUrl+"?movId="+movId;
-    
+    var queryUrl = gwacRootURL + getDateStrListJsonUrl + "?movId=" + movId;
+
     $.ajax({
       type: "get",
       url: queryUrl,
@@ -128,18 +131,18 @@ $(function () {
         var objs = data.objs;
         if (objs.length > 0) {
           $.each(objs, function (i, item) {
-            if(i===0){
-            $('#obsDate').append($('<option>', {
-              value: item,
-              text: item,
-              selected: true
-            }));
-          }else{
-            $('#obsDate').append($('<option>', {
-              value: item,
-              text: item
-            }));
-          }
+            if (i === 0) {
+              $('#obsDate').append($('<option>', {
+                value: item,
+                text: item,
+                selected: true
+              }));
+            } else {
+              $('#obsDate').append($('<option>', {
+                value: item,
+                text: item
+              }));
+            }
           });
         }
       }
@@ -153,31 +156,37 @@ $(function () {
 
     $("#star-light-curve").bind("plothover", function (event, pos, item) {
       if (item) {
-        var unhighlightIdx=showImageIdx-1;
-        if(unhighlightIdx<0){
-          unhighlightIdx=unhighlightIdx+totalImage;
+        var unhighlightIdx = showImageIdx - 1;
+        if (unhighlightIdx < 0) {
+          unhighlightIdx = unhighlightIdx + totalImage;
         }
         otCurve.unhighlight(0, unhighlightIdx);
-        showImageIdx=item.dataIndex;
+        showImageIdx = item.dataIndex;
         otCurve.highlight(0, showImageIdx);
-        showImageIdx = showImageIdx+1;
-        showImageIdx=showImageIdx%totalImage;
+        showImageIdx = showImageIdx + 1;
+        showImageIdx = showImageIdx % totalImage;
         clearInterval(imgShowInterval);
         autoShowRunning = false;
         var x = item.datapoint[0].toFixed(4);
         var y = item.datapoint[1].toFixed(2);
         $("#tooltip").html(item.series.data[item.dataIndex][3]).css({top: item.pageY - 25, left: item.pageX + 10}).fadeIn(200);
-        
-      var fName = item.series.data[item.dataIndex][6];
-      var x1 = item.series.data[item.dataIndex][4];
-      var y1 = item.series.data[item.dataIndex][5];
+
+        var fName = item.series.data[item.dataIndex][6];
+        var x1 = item.series.data[item.dataIndex][4];
+        var y1 = item.series.data[item.dataIndex][5];
 //      console.log(fName);
-      var fullImgUrl = "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
-      var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
-      + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
+//      var fullImgUrl = "/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg";
+//      var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + fName.substring(14, 20) + "/" + fName.substring(0, 4) + "/" + fName.substring(0, 29) + ".jpg"
+//      + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
+        var dateStr00 = fName.substring(fName.indexOf('objt_') + 5, fName.indexOf('T'));
+        var camName00 = fName.substring(0, 4);
+        var imgName00 = fName.substring(0, fName.indexOf('.'));
+        var fullImgUrl = "/images/fits_preview/20" + dateStr00 + "/" + camName00 + "/" + imgName00 + ".jpg";
+        var subImgUrl = gwacRootURL + "/getSubImage.action?imgPath=/images/fits_preview/20" + dateStr00 + "/" + camName00 + "/" + imgName00 + ".jpg"
+                + "&centerX=" + x1 + "&centerY=" + y1 + "&cropW=400&cropH=400&labelW=0";
 //      console.log(fullImgUrl);
-      $("#movObjSubImg").attr("src", subImgUrl);
-      $("#movObjfullImg").attr("href", fullImgUrl);
+        $("#movObjSubImg").attr("src", subImgUrl);
+        $("#movObjfullImg").attr("href", fullImgUrl);
       } else {
         $("#tooltip").hide();
       }
@@ -195,22 +204,29 @@ $(function () {
     {
       ccdList = [];
     }
-    
+
     coorShow = [];
     $.each(ccdList, function (i, item) {
-       var dateObj = Date.parse(item['date_ut']) / 60000;
-       var minute = dateObj - minDateMinute;
-       coorShow.push([minute, item['mag_aper'], item['magerr_aper'], item['date_ut'], item['x'], item['y'], item['img_name']]);
+      var dateObj = Date.parse(item['date_ut']) / 60000;
+      var minute = dateObj - minDateMinute;
+      coorShow.push([minute, item['mag_aper'], item['magerr_aper'], item['date_ut'], item['x'], item['y'], item['img_name']]);
     });
     var datas = [{
         label: 'move object light curve',
         data: coorShow,
         points: {radius: 1},
-        color:'red'
+        color: 'red'
       }];
-      
+
+    showImageIdx = 0;
     otCurve = $.plot("#star-light-curve", datas, plotOption);
     totalImage = coorShow.length;
+
+    if (autoShowRunning === true) {
+      clearInterval(imgShowInterval);
+      autoShowRunning = false;
+    }
+
     imgShowInterval = setInterval(showImage, playSpeed);
     autoShowRunning = true;
   }

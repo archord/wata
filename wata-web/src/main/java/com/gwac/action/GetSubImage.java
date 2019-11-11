@@ -26,18 +26,18 @@ import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.Result;
 
 /*parameter：currentDirectory, configFile, [fileUpload], [fileUpload].*/
-/* wget command example: */
-/* wget http://localhost:8080/gwac/downloadot2.action?otName=M151207_C00163*/
+ /* wget command example: */
+ /* wget http://localhost:8080/gwac/downloadot2.action?otName=M151207_C00163*/
 /**
  * @author xy
  */
 @Actions({
   @Action(value = "/getSubImage", results = {
     @Result(name = "download", type = "stream",
-            params = {"contentType", "image/jpeg",
-              "inputName", "inputStream",
-              "contentDisposition", "attachment;filename=\"${fileName}\"",
-              "bufferSize", "1024"})})
+	    params = {"contentType", "image/jpeg",
+	      "inputName", "inputStream",
+	      "contentDisposition", "attachment;filename=\"${fileName}\"",
+	      "bufferSize", "1024"})})
 })
 public class GetSubImage extends ActionSupport {
 
@@ -60,6 +60,8 @@ public class GetSubImage extends ActionSupport {
 
     contentType = "image/jpeg";
     fileName = "empty.jpg";
+    int maxX = 4096;
+    int maxY = 4188;
 
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     //必须OT名称
@@ -68,31 +70,36 @@ public class GetSubImage extends ActionSupport {
       String tImgPath = imgPath.trim();
       //images/thumbnail/20171122/G044/G044_mon_objt_171122T14122837.jpg
       if (tImgPath.contains("images")) {
-        if (tImgPath.charAt(0) == '/') {
-          //remove "/images"
-          tImgPath = tImgPath.substring(7);
-        } else {
-          //remove "images"
-          tImgPath = tImgPath.substring(6);
-        }
+	if (tImgPath.charAt(0) == '/') {
+	  //remove "/images"
+	  tImgPath = tImgPath.substring(7);
+	} else {
+	  //remove "images"
+	  tImgPath = tImgPath.substring(6);
+	}
       }
       tImgPath = dataRootDir + tImgPath;
       fileName = tImgPath.substring(tImgPath.lastIndexOf('/') + 1);
 
       try {
-        File fullImg = new File(tImgPath);
-        if (fullImg.exists()) {
-          BufferedImage im = ImageIO.read(fullImg);
-          BufferedImage timg = CommonFunction.getSubImage(im, centerX, centerY, cropW, cropH, labelW);
-          ImageIO.write(timg, "jpg", baos);
-        } else {
-          fileName = "GWAC_ccdimg_sub.jpg";
+	File fullImg = new File(tImgPath);
+	Boolean hasImage = false;
+	if (fullImg.exists()) {
+	  BufferedImage im = ImageIO.read(fullImg);
+	  BufferedImage timg = CommonFunction.getSubImage(im, centerX, centerY, cropW, cropH, labelW);
+	  if (timg != null) {
+	    hasImage = true;
+	    ImageIO.write(timg, "jpg", baos);
+	  }
+	}
+	if (!hasImage) {
+	  fileName = "GWAC_ccdimg_sub.jpg";
 	  tImgPath = dataRootDir + "/realTimeOtDistribution/GWAC_ccdimg_sub.jpg";
-          BufferedImage im = ImageIO.read(new File(tImgPath));
-          ImageIO.write(im, "jpg", baos);
-        }
+	  BufferedImage im = ImageIO.read(new File(tImgPath));
+	  ImageIO.write(im, "jpg", baos);
+	}
       } catch (IOException e) {
-        log.error("read image " + imgPath + " info error.", e);
+	log.error("read image " + imgPath + " info error.", e);
       }
 
     }

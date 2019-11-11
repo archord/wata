@@ -491,7 +491,7 @@ public class OTCatalogDaoImpl implements OTCatalogDao {
   public List<OTCatalog> getMov1Catalog(String path) {
     BufferedReader br = null;
     String line = "";
-    String splitBy = ",";
+    String splitBy = " +";
     List<OTCatalog> otList = new ArrayList<OTCatalog>();
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -512,6 +512,7 @@ public class OTCatalogDaoImpl implements OTCatalogDao {
 	}
 	lineNumReal++;
 	// split on comma(',')  
+	line = line.trim();
 	String[] strs = line.split(splitBy);
 	// create car object to store values  
 	OTCatalog ot = new OTCatalog();
@@ -589,7 +590,7 @@ public class OTCatalogDaoImpl implements OTCatalogDao {
   public List<OTCatalog> getObj1Catalog(String path) {
     BufferedReader br = null;
     String line = "";
-    String splitBy = ",";
+    String splitBy = " +";
     List<OTCatalog> otList = new ArrayList<OTCatalog>();
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -610,6 +611,7 @@ public class OTCatalogDaoImpl implements OTCatalogDao {
 	}
 	lineNumReal++;
 	// split on comma(',')  
+	line = line.trim();
 	String[] strs = line.split(splitBy);
 	// create car object to store values  
 	OTCatalog ot = new OTCatalog();

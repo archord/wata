@@ -224,7 +224,7 @@ public class OtObserveRecordDAOImpl extends BaseHibernateDaoImpl<OtObserveRecord
   public OtObserveRecord getByFfIdRecordFileId(long ffId, int recordFileId) {
 
     Session session = getCurrentSession();
-    String sql = "select * from ot_observe_record where ff_id=" + ffId + " and ff_number=" + recordFileId;
+    String sql = "select * from ot_observe_record where ff_id=" + ffId + " and image_ot1_num=" + recordFileId;
     Query q = session.createSQLQuery(sql).addEntity(OtObserveRecord.class);
     List rst = q.list();
     if (rst.size() > 0) {

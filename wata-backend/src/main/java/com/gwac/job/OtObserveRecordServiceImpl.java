@@ -119,7 +119,8 @@ public class OtObserveRecordServiceImpl implements OtObserveRecordService {
 	oor.setThreshold(otc.getThreshold());
 	oor.setMagAper(otc.getMagAper());
 	oor.setMagerrAper(otc.getMagerrAper());
-	oor.setFfNumber(otc.getObjNum()); //record file number, recordFileId
+	oor.setFfNumber(number); //record file number, recordFileId
+	oor.setImageOt1Num(otc.getObjNum());
 	oor.setDateStr(fileDate);
 	oor.setDpmId(dpmId);
 	oor.setRequestCut(false);
