@@ -30,13 +30,13 @@ $(function () {
   ];
 
   initStarCurveShow();
-//  loadRecords();
+  loadRecords();
   $('#dayList').change(loadRecords);
 
   function loadRecords() {
     var queryUrl = parmUrl;
     var days = $('#dayList').val();
-
+    console.log(days);
     $.ajax({
       type: "get",
       url: queryUrl,
@@ -57,7 +57,10 @@ $(function () {
     $("#star-light-curve").bind("plothover", function (event, pos, item) {
       if (item) {
         //var x = item.datapoint[0].toFixed(4);
-        var x = item.datapoint[2];
+        var curData = item.series.data[item.dataIndex];
+        console.log(item.datapoint);
+        console.log(curData);
+        var x = curData[2];
         var y = item.datapoint[1].toFixed(2);
         $("#tooltip").html(item.series.label + "(" + x + ", " + y + ")").css({top: item.pageY - 25, left: item.pageX + 10}).fadeIn(200);
       } else {

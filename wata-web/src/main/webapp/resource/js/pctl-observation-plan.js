@@ -27,7 +27,7 @@ $(function() {
       "processing": true,
       "searching": false,
       "lengthChange": true,
-      "pageLength": 3,
+      "pageLength": 5,
       "scrollX": true,
       "ajax": {
         url: queryUrl,

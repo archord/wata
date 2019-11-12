@@ -78,6 +78,37 @@ public class ImageCheckServiceImpl implements BaseService {
       String rootPath = "/data/wata_data/yuntu/allsky/Session1";
       File file = new File(rootPath);
       String[] fileNames = file.list();
+      String latestFileName = "";  //DSC_2019-11-07__12-32-32.jpg 20191112130242.jpg
+      for (String fileName : fileNames) {
+	if (fileName.length()==18) {
+	  if (latestFileName.length() == 0) {
+	    latestFileName = fileName;
+	  } else {
+	    if (latestFileName.compareTo(fileName) < 0) {
+	      latestFileName = fileName;
+	    }
+	  }
+	}
+      }
+      if(latestFileName.length()==18){
+	String dateStr = latestFileName.substring(0, 14);
+	Date td = CommonFunction.stringToDate(dateStr, "yyyyMMddHHmmss");
+	SystemParameter sp = new SystemParameter();
+	sp.setSpId(0);
+	sp.setLatestClouldImage(latestFileName);
+	sp.setLatestClouldImageTime(td);
+	sysParmDao.updateYuntu(sp);
+      }
+    } catch (Exception ex) {
+      log.error("Job error", ex);
+    }
+  }
+
+  void getLatestYuntu2() {
+    try {
+      String rootPath = "/data/wata_data/yuntu/allsky/Session1";
+      File file = new File(rootPath);
+      String[] fileNames = file.list();
       String latestFileName = "";  //DSC_2019-11-07__12-32-32.jpg
       for (String fileName : fileNames) {
 	if (fileName.startsWith("DSC")) {
