@@ -145,7 +145,9 @@
                     $('#rainState').html("无雨");
                     $('#rainState').css("color", "#0e0");
                 }
+                if(rainfall.ctime!==null&&rainfall.ctime.indexOf('T')>0){
                 $('#rainState').attr("title", rainfall.ctime.replace("T", " "));
+                }
                 $('#yuntuTime').html(systemParameter.latestClouldImageTime.replace("T", " "));
                 var yuntuUrl = "/images/"+systemParameter.clouldImagePath+"/"+systemParameter.latestClouldImage + "?timestamp=" + new Date().getTime();
                 $('#yuntuImg').attr("src", yuntuUrl);
@@ -217,7 +219,9 @@
                     $('#cameraState').css("color", "#0e0");
                   }
                   $('#cameraState').html(showStr);
+                if(camera.cameraUtc!==null&&camera.cameraUtc.indexOf('T')>0){
                   $('#cameraState').attr("title", camera.cameraUtc.replace("T", " "));
+              }
                 }
                 if (dome.linked === 0) {
                   $('#domeState').html("未连接");
