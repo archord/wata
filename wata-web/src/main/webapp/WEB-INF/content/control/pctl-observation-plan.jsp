@@ -35,7 +35,10 @@
           <span style="font-size: 18px">已执行观测计划列表&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <select id="unitId2" name="unitId" height="30">
             <option value="">全部望远镜</option>
-            <option value="001">望远镜01</option>
+            <option value="001">望远镜1</option>
+            <option value="002">望远镜2</option>
+            <option value="003">望远镜3</option>
+            <option value="004">望远镜4</option>
           </select>
         </form>
       </div>
@@ -54,7 +57,10 @@
           <span style="font-size: 18px">待执行观测计划列表&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <select id="unitId" name="unitId" height="30">
             <option value="">全部望远镜</option>
-            <option value="001">望远镜01</option>
+            <option value="001">望远镜1</option>
+            <option value="002">望远镜2</option>
+            <option value="003">望远镜3</option>
+            <option value="004">望远镜4</option>
           </select>
         </form>
       </div>

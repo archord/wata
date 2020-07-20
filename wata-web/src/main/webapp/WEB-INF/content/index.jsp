@@ -46,7 +46,7 @@
             <div id="main_content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-7 ">
+                        <div class="col-xs-12 col-sm-12 col-md-6 ">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 ">
                                     <h4>云图显示，时间：<span id="yuntuTime">2019-09-19 10:25:40</span></h4>
@@ -59,40 +59,62 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-5 ">
+                        <div class="col-xs-12 col-sm-12 col-md-6 ">
+                            <div class="row">&nbsp;<br/>&nbsp;<br/></div>
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3>雨量</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:#0e0"><span id="rainState">0.0</span></h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="rainError"></h3></div>
+                                <div class="col-md-2 "><h3>雨量</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0"><span id="rainState">0.0</span></h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="rainError"></h3></div>
+                                <div class="col-md-2 "><h3>风速</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0"><span id="windState">0</span>米/秒</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="windError"></h3></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3>风速</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:#0e0"><span id="windState">0</span>米/秒</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="windError"></h3></div>
+                                <div class="col-md-2 "><h3>圆顶1</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0" id="dome1State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="dome1Error"></h3></div>
+                                <div class="col-md-2 "><h3>圆顶2</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0" id="dome2State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="dome2Error"></h3></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3>圆顶</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:#0e0" id="domeState">正常</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="domeError"></h3></div>
+                                <div class="col-md-2 "><h3>转台1</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0" id="mount1State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="mount1Error"></h3></div>
+                                <div class="col-md-2 "><h3>转台3</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0" id="mount3State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="mount3Error"></h3></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3>转台</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:#0e0" id="mountState">正常</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="mountError"></h3></div>
+                                <div class="col-md-2 "><h3>相机1</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera1State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera1Error"></h3></div>
+                                <div class="col-md-2 "><h3>相机3</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera3State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera3Error"></h3></div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3>相机</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="cameraState">正常</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="cameraError"></h3></div>
+                                <div class="col-md-2 "><h3>转台2</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0" id="mount2State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="mount2Error"></h3></div>
+                                <div class="col-md-2 "><h3>转台4</h3></div>
+                                <div class="col-md-2 "><h3 style="color:#0e0" id="mount4State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="mount4Error"></h3></div>
                             </div>
-<!--                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3>镜盖</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:#0e0" id="coverState">正常</h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3 style="color:red" id="coverError"></h3></div>
-                            </div>-->
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3><input type="button" value="开始观测" class="btn btn-primary" id="startBtn" style="font-size: 20px"/></h3></div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 "><h3><input type="button" value="停止观测" class="btn btn-primary" id="stopBtn" style="font-size: 20px"/></h3></div>
+                                <div class="col-md-2 "><h3>相机2</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera2State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera2Error"></h3></div>
+                                <div class="col-md-2 "><h3>相机4</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera4State">正常</h3></div>
+                                <div class="col-md-2 "><h3 style="color:red" id="camera4Error"></h3></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 "></div>
+                                <div class="col-md-2 "><h3><input type="button" value="开始观测" class="btn btn-primary" id="startBtn" style="font-size: 20px"/></h3></div>
+                                <div class="col-md-2 "></div>
+                                <div class="col-md-2 "></div>
+                                <div class="col-md-2 "><h3><input type="button" value="停止观测" class="btn btn-primary" id="stopBtn" style="font-size: 20px"/></h3></div>
                             </div>
                         </div>
                     </div>
@@ -110,20 +132,28 @@
                   $body.className = $body.className === 'menu-active' ? '' : 'menu-active';
                 });
               }
-              
-              $('#startBtn').click(function(){
-                  var controlUrl = "<%=request.getContextPath()%>/send-control-command.action?controlCommand=start";
-                  $.ajax({url: controlUrl, type: "GET", success: function(msg){alert(msg.echo);}, error:  function(msg){alert(msg.echo);}});
+
+              $('#startBtn').click(function () {
+                var controlUrl = "<%=request.getContextPath()%>/send-control-command.action?controlCommand=start";
+                $.ajax({url: controlUrl, type: "GET", success: function (msg) {
+                    alert(msg.echo);
+                  }, error: function (msg) {
+                    alert(msg.echo);
+                  }});
               });
-              $('#stopBtn').click(function(){
-                  var controlUrl = "<%=request.getContextPath()%>/send-control-command.action?controlCommand=stop";
-                  $.ajax({url: controlUrl, type: "GET", success: function(msg){alert(msg.echo);}, error:  function(msg){alert(msg.echo);}});
+              $('#stopBtn').click(function () {
+                var controlUrl = "<%=request.getContextPath()%>/send-control-command.action?controlCommand=stop";
+                $.ajax({url: controlUrl, type: "GET", success: function (msg) {
+                    alert(msg.echo);
+                  }, error: function (msg) {
+                    alert(msg.echo);
+                  }});
               });
 
               var requestTime = 5000;
               var dataurl = "<%=request.getContextPath()%>/get-system-parameter.action";
               $.ajax({url: dataurl, type: "GET", success: onDataReceived, error: errorLog});
-              setInterval(function(){
+              setInterval(function () {
                 $.ajax({url: dataurl, type: "GET", success: onDataReceived, error: errorLog});
               }, requestTime);
               function errorLog() {
@@ -131,160 +161,146 @@
               }
               function onDataReceived(result) {
                 console.log(result);
-                camera = result.camera;
-                dome = result.dome;
-                mount = result.mount;
+                cameras = result.cameras;
+                domes = result.domes;
+                mounts = result.mounts;
                 rainfall = result.rainfall;
                 systemParameter = result.systemParameter;
 
                 //$('#rainState').html(rainfall.value + "毫米");
-                if(rainfall.value>0.5){
-                    $('#rainState').html("有雨");
-                    $('#rainState').css("color", "red");
-                }else{
-                    $('#rainState').html("无雨");
-                    $('#rainState').css("color", "#0e0");
+                if (rainfall.value > 0.5) {
+                  $('#rainState').html("有雨");
+                  $('#rainState').css("color", "red");
+                } else {
+                  $('#rainState').html("无雨");
+                  $('#rainState').css("color", "#0e0");
                 }
-                if(rainfall.ctime!==null&&rainfall.ctime.indexOf('T')>0){
-                $('#rainState').attr("title", rainfall.ctime.replace("T", " "));
+                if (rainfall.ctime !== null && rainfall.ctime.indexOf('T') > 0) {
+                  $('#rainState').attr("title", rainfall.ctime.replace("T", " "));
                 }
                 $('#yuntuTime').html(systemParameter.latestClouldImageTime.replace("T", " "));
-                var yuntuUrl = "/images/"+systemParameter.clouldImagePath+"/"+systemParameter.latestClouldImage + "?timestamp=" + new Date().getTime();
-                $('#yuntuImg').attr("src", yuntuUrl);
-                $('#yuntuA').attr("href", yuntuUrl);
+                var yuntuUrl = "/images/" + systemParameter.clouldImagePath + "/" + systemParameter.latestClouldImage + "?timestamp=" + new Date().getTime();
+//                $('#yuntuImg').attr("src", yuntuUrl);
+//                $('#yuntuA').attr("href", yuntuUrl);
 
-                if (mount.linked === 0) {
-                  $('#mountState').html("未连接");
-                  $('#mountState').css("color", "red");
-                } else {
-                  var tstate = mount.state;
-                  var showStr = '';
-                  if (tstate === 0) {
-                    showStr = '错误';
-                  } else if (tstate === 1) {
-                    showStr = '静止';
-                  } else if (tstate === 2) {
-                    showStr = '搜索零点';
-                  } else if (tstate === 3) {
-                    showStr = '完成零点搜索';
-                  } else if (tstate === 4) {
-                    showStr = '复位中';
-                  } else if (tstate === 5) {
-                    showStr = '复位';
-                  } else if (tstate === 6) {
-                    showStr = '指向';
-                  } else if (tstate === 7) {
-                    showStr = '跟踪';
-                  }
-                  if (mount.state === 0) {
-                    $('#mountError').html("错误码:" + mount.errcode);
-                    $('#mountState').css("color", "red");
+
+                $.each(mounts, function (i, mount) {
+                  var errorId = "#mount" + mount.mountId + "Error";
+                  var stateId = "#mount" + mount.mountId + "State";
+                  if (mount.linked === 0) {
+                    $(stateId).html("未连接");
+                    $(stateId).css("color", "red");
                   } else {
-                    $('#mountError').html("");
-                    $('#mountState').css("color", "#0e0");
+                    var tstate = mount.state;
+                    var showStr = '';
+                    if (tstate === 0) {
+                      showStr = '错误';
+                    } else if (tstate === 1) {
+                      showStr = '静止';
+                    } else if (tstate === 2) {
+                      showStr = '搜索零点';
+                    } else if (tstate === 3) {
+                      showStr = '完成零点搜索';
+                    } else if (tstate === 4) {
+                      showStr = '复位中';
+                    } else if (tstate === 5) {
+                      showStr = '复位';
+                    } else if (tstate === 6) {
+                      showStr = '指向';
+                    } else if (tstate === 7) {
+                      showStr = '跟踪';
+                    }
+                    if (mount.state === 0) {
+                      $(errorId).html("错误码:" + mount.errcode);
+                      $(stateId).css("color", "red");
+                    } else {
+                      $(errorId).html("");
+                      $(stateId).css("color", "#0e0");
+                    }
+                    $(stateId).html(showStr);
+                    $(stateId).attr("title", mount.timeUtc.replace("T", " "));
                   }
-                  $('#mountState').html(showStr);
-                  $('#mountState').attr("title", mount.timeUtc.replace("T", " "));
-                }
-                if (camera.linked === 0) {
-                  $('#cameraState').html("未连接");
-                  $('#cameraState').css("color", "red");
-                } else {
-                  var tstate = camera.status;
-                  var showStr = '';
-                  if (tstate === 0) {
-                    showStr = '错误';
-                  } else if (tstate === 1) {
-                    showStr = '空闲';
-                  } else if (tstate === 2) {
-                    showStr = '曝光中';
-                  } else if (tstate === 4) {
-                    showStr = '完成曝光';
-                  } else if (tstate === 8) {
-                    showStr = '中止曝光';
-                  } else if (tstate === 16) {
-                    showStr = '暂停曝光';
-                  } else if (tstate === 32) {
-                    showStr = '延时等待';
-                  } else if (tstate === 64) {
-                    showStr = '等待同步信号';
-                  } else if (tstate === 128) {
-                    showStr = '平场重定位';
-                  }
-                  if (tstate === 0) {
-                    $('#cameraError').html("错误码:" + camera.errcode);
-                    $('#cameraState').css("color", "red");
+                });
+
+                $.each(cameras, function (i, camera) {
+                  var errorId = "#camera" + camera.cameraId + "Error";
+                  var stateId = "#camera" + camera.cameraId + "State";
+                  if (camera.linked === 0) {
+                    $(stateId).html("未连接");
+                    $(stateId).css("color", "red");
                   } else {
-                    $('#cameraError').html("");
-                    $('#cameraState').css("color", "#0e0");
+                    var tstate = camera.status;
+                    var showStr = '';
+                    if (tstate === 0) {
+                      showStr = '错误';
+                    } else if (tstate === 1) {
+                      showStr = '空闲';
+                    } else if (tstate === 2) {
+                      showStr = '曝光中';
+                    } else if (tstate === 4) {
+                      showStr = '完成曝光';
+                    } else if (tstate === 8) {
+                      showStr = '中止曝光';
+                    } else if (tstate === 16) {
+                      showStr = '暂停曝光';
+                    } else if (tstate === 32) {
+                      showStr = '延时等待';
+                    } else if (tstate === 64) {
+                      showStr = '等待同步信号';
+                    } else if (tstate === 128) {
+                      showStr = '平场重定位';
+                    }
+                    if (tstate === 0) {
+                      $(errorId).html("错误码:" + camera.errcode);
+                      $(stateId).css("color", "red");
+                    } else {
+                      $(errorId).html("");
+                      $(stateId).css("color", "#0e0");
+                    }
+                    $(stateId).html(showStr);
+                    if (camera.cameraUtc !== null && camera.cameraUtc.indexOf('T') > 0) {
+                      $(stateId).attr("title", camera.cameraUtc.replace("T", " "));
+                    }
                   }
-                  $('#cameraState').html(showStr);
-                if(camera.cameraUtc!==null&&camera.cameraUtc.indexOf('T')>0){
-                  $('#cameraState').attr("title", camera.cameraUtc.replace("T", " "));
-              }
-                }
-                if (dome.linked === 0) {
-                  $('#domeState').html("未连接");
-                  $('#domeState').css("color", "red");
-                } else {
-                  var tstate = dome.status;
-                  var showStr = '';
-                  if (tstate === 0) {
-                    showStr = '错误';
-                  } else if (tstate === 1) {
-                    showStr = '正在打开';
-                  } else if (tstate === 2) {
-                    showStr = '已打开';
-                  } else if (tstate === 3) {
-                    showStr = '正在关闭';
-                  } else if (tstate === 4) {
-                    showStr = '已关闭';
-                  } else if (tstate === 5) {
-                    showStr = '半开后静止';
-                  }else{
+                });
+
+                $.each(domes, function (i, dome) {
+                  var errorId = "#dome" + dome.domeId + "Error";
+                  var stateId = "#dome" + dome.domeId + "State";
+                  if (dome.linked === 0) {
+                    $(stateId).html("未连接");
+                    $(stateId).css("color", "red");
+                  } else {
+                    var tstate = dome.status;
+                    var showStr = '';
+                    if (tstate === 0) {
+                      showStr = '错误';
+                    } else if (tstate === 1) {
+                      showStr = '正在打开';
+                    } else if (tstate === 2) {
+                      showStr = '已打开';
+                    } else if (tstate === 3) {
+                      showStr = '正在关闭';
+                    } else if (tstate === 4) {
+                      showStr = '已关闭';
+                    } else if (tstate === 5) {
+                      showStr = '半开后静止';
+                    } else {
                       showStr = tstate;
+                    }
+                    if (tstate === 0) {
+                      $(errorId).html("错误码:" + dome.errcode);
+                      $(stateId).css("color", "red");
+                    } else {
+                      $(errorId).html("");
+                      $(stateId).css("color", "#0e0");
+                    }
+                    $(stateId).html(showStr);
+                    $(stateId).attr("title", dome.ctime.replace("T", " "));
                   }
-                  if (tstate === 0) {
-                    $('#domeError').html("错误码:" + dome.errcode);
-                    $('#domeState').css("color", "red");
-                  } else {
-                    $('#domeError').html("");
-                    $('#domeState').css("color", "#0e0");
-                  }
-                  $('#domeState').html(showStr);
-                  $('#domeState').attr("title", dome.ctime.replace("T", " "));
-                }
-
-//                if (camera.coverLinked === 0) {
-//                  $('#coverState').html("未连接");
-//                  $('#coverState').css("color", "red");
-//                } else {
-//                  var tstate = camera.coverStatus;
-//                  var showStr = '';
-//                  if (tstate === 0) {
-//                    showStr = '错误';
-//                  } else if (tstate === 1) {
-//                    showStr = '正在打开';
-//                  } else if (tstate === 2) {
-//                    showStr = '已打开';
-//                  } else if (tstate === 3) {
-//                    showStr = '正在关闭';
-//                  } else if (tstate === 4) {
-//                    showStr = '已关闭';
-//                  }
-//                  if (tstate === 0) {
-//                    $('#coverError').html("错误码:" + camera.cameraCoverErrcode);
-//                    $('#coverState').css("color", "red");
-//                  } else {
-//                    $('#coverError').html("");
-//                    $('#coverState').css("color", "#0e0");
-//                  }
-//                  $('#coverState').html(showStr);
-//                  $('#coverState').attr("title", camera.cameraCoverUtc.replace("T", " "));
-//                }
+                });
 
               }
-
             });
         </script>
     </body>

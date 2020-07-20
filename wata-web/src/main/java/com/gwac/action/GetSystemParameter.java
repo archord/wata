@@ -11,6 +11,7 @@ import com.gwac.model.Mount;
 import com.gwac.model.Rainfall;
 import com.gwac.model.SystemParameter;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,6 +23,28 @@ import org.apache.struts2.convention.annotation.Result;
   @Action(value = "/get-system-parameter", results = {
     @Result(name = "success", type = "json")})})
 public class GetSystemParameter extends ActionSupport {
+
+  /**
+   * @return the cameras
+   */
+  public List<Camera> getCameras() {
+    return cameras;
+  }
+
+  /**
+   * @return the domes
+   */
+  public List<Dome> getDomes() {
+    return domes;
+  }
+
+  /**
+   * @return the mounts
+   */
+  public List<Mount> getMounts() {
+    return mounts;
+  }
+
 
   private static final long serialVersionUID = 1073694279068513593L;
   private static final Log log = LogFactory.getLog(GetSystemParameter.class);
@@ -38,9 +61,9 @@ public class GetSystemParameter extends ActionSupport {
   private RainfallDao rainfallDao = null;
   
   private SystemParameter systemParameter;
-  private Camera camera;
-  private Dome dome;
-  private Mount mount;
+  private List<Camera> cameras;
+  private List<Dome> domes;
+  private List<Mount> mounts;
   private Rainfall rainfall;
 
   @SuppressWarnings("unchecked")
@@ -48,9 +71,9 @@ public class GetSystemParameter extends ActionSupport {
 
     log.debug("get SystemParameter");
     systemParameter = systemParameterDao.getById((long)0);
-    camera = cameraDao.getByName("001", "001", "011");
-    dome = domeDao.getByName("001");
-    mount = mountDao.getByGroupUnitId("001", "001");
+    cameras = cameraDao.findAll();
+    domes = domeDao.findAll();
+    mounts = mountDao.findAll();
     rainfall = rainfallDao.getLatestRecord();
 
     return SUCCESS;
@@ -63,26 +86,6 @@ public class GetSystemParameter extends ActionSupport {
     return systemParameter;
   }
 
-  /**
-   * @return the camera
-   */
-  public Camera getCamera() {
-    return camera;
-  }
-
-  /**
-   * @return the dome
-   */
-  public Dome getDome() {
-    return dome;
-  }
-
-  /**
-   * @return the mount
-   */
-  public Mount getMount() {
-    return mount;
-  }
 
   /**
    * @return the rainfall

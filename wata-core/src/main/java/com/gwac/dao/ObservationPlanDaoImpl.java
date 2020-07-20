@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
 public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan> implements ObservationPlanDao {
 
   private static final Log log = LogFactory.getLog(ObservationPlanDaoImpl.class);
-  
+
   @Override
   public void abandonUndo() {
     Session session = getCurrentSession();
@@ -49,20 +49,21 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
   public String findRecord(int start, int length, String unitId, String executeStatus) {
 
     String sql = "SELECT text(JSON_AGG((SELECT r FROM (SELECT tmp1.*) r))) "
-	    + "from(SELECT sl.* FROM observation_plan sl ";
-    if (executeStatus.equalsIgnoreCase("begin") || executeStatus.equalsIgnoreCase("over")) {
-      sql = sql + " where execute_status is not null ORDER BY begin_time desc ";
-    }else{
-      sql = sql + " where execute_status is null ORDER BY begin_time asc ";
+	    + "from(SELECT sl.* FROM observation_plan sl where 1=1 ";
+
+    if (unitId != null && !unitId.isEmpty()) {
+      sql += " and unit_id='" + unitId + "' ";
     }
-//    if (unitId != null && !unitId.isEmpty()) {
-//      sql += "and unit_id='" + unitId + "' ";
-//    }
-//    sql += "ORDER BY begin_time desc ";
-    if(length>0){
+
+    if (executeStatus.equalsIgnoreCase("begin") || executeStatus.equalsIgnoreCase("over")) {
+      sql = sql + " and execute_status is not null ORDER BY begin_time desc ";
+    } else {
+      sql = sql + " and execute_status is null ORDER BY begin_time asc ";
+    }
+    if (length > 0) {
       sql += " OFFSET " + start + " LIMIT " + length + " ";
     }
-      sql += " )as tmp1";
+    sql += " )as tmp1";
 
     //log.debug(sql);
     String rst = "";
@@ -80,7 +81,7 @@ public class ObservationPlanDaoImpl extends BaseHibernateDaoImpl<ObservationPlan
 
     if (executeStatus.equalsIgnoreCase("begin") || executeStatus.equalsIgnoreCase("over")) {
       sql = sql + " where execute_status is not null ";
-    }else{
+    } else {
       sql = sql + " where execute_status is null ";
     }
 //    if (unitId != null && !unitId.isEmpty()) {
