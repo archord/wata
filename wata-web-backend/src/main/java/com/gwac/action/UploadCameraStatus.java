@@ -30,12 +30,33 @@ import org.apache.struts2.convention.annotation.Action;
  */
 public class UploadCameraStatus extends ActionSupport {
 
+  /**
+   * @param gId the gId to set
+   */
+  public void setGid(String gId) {
+    this.gId = gId;
+  }
+
+  /**
+   * @param uId the uId to set
+   */
+  public void setUid(String uId) {
+    this.uId = uId;
+  }
+
+  /**
+   * @param cId the cId to set
+   */
+  public void setCid(String cId) {
+    this.cId = cId;
+  }
+
   private static final Log log = LogFactory.getLog(UploadCameraStatus.class);
   private static final String dateFormateString2 = "yyyyMMdd HHmmss";
 
-  private String groupId;
-  private String unitId;
-  private String camId;
+  private String gId;
+  private String uId;
+  private String cId;
   private String utc;
   private Integer focus;
   private Float coolget;
@@ -57,9 +78,9 @@ public class UploadCameraStatus extends ActionSupport {
   public void upload() {
 
     echo = "";
-    log.debug("groupId:" + groupId);
-    log.debug("unitId:" + unitId);
-    log.debug("camId:" + camId);
+    log.debug("groupId:" + gId);
+    log.debug("unitId:" + uId);
+    log.debug("camId:" + cId);
     log.debug("utc:" + utc);
     log.debug("focus:" + focus);
     log.debug("coolget:" + coolget);
@@ -71,12 +92,12 @@ public class UploadCameraStatus extends ActionSupport {
     log.debug("frmNo:" + frmNo);
     log.debug("fileName:" + fileName);
 
-    if (groupId == null || groupId.isEmpty() || unitId == null || unitId.isEmpty()
-             || camId == null || camId.isEmpty()) {
+    if (gId == null || gId.isEmpty() || uId == null || uId.isEmpty()
+             || cId == null || cId.isEmpty()) {
       echo = "groupId, unitId and camId cannot be empty.";
       log.warn(echo);
     } else {
-      Camera tcamera = cameraDao.getByName(groupId, unitId, camId);
+      Camera tcamera = cameraDao.getByName(gId, uId, cId);
       if (tcamera != null) {
         CameraMonitor obj = new CameraMonitor();
         obj.setCameraId(tcamera.getCameraId());
@@ -96,7 +117,7 @@ public class UploadCameraStatus extends ActionSupport {
 	cameraDao.updateCameraStatus(obj);
         echo = "upload camera status success.";
       } else {
-        echo = "can not find camera: " + camId;
+        echo = "can not find camera: " + cId;
       }
       log.debug(echo);
     }
@@ -122,13 +143,6 @@ public class UploadCameraStatus extends ActionSupport {
    */
   public String getEcho() {
     return echo;
-  }
-
-  /**
-   * @param camId the camId to set
-   */
-  public void setCamId(String camId) {
-    this.camId = camId;
   }
 
   /**
@@ -199,20 +213,6 @@ public class UploadCameraStatus extends ActionSupport {
    */
   public void setFileName(String fileName) {
     this.fileName = fileName;
-  }
-  
-  /**
-   * @param groupId the groupId to set
-   */
-  public void setGroupId(String groupId) {
-    this.groupId = groupId;
-  }
-
-  /**
-   * @param unitId the unitId to set
-   */
-  public void setUnitId(String unitId) {
-    this.unitId = unitId;
   }
 
 }

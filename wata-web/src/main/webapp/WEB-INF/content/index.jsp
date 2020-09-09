@@ -32,7 +32,7 @@
                 <!--<li><a href="<%=request.getContextPath()%>/monitor/pctl-telescope-monitor.action">系统控制</a></li>-->
                 <li><a href="<%=request.getContextPath()%>/control/pctl-observation-plan.action" target="_blank">观测计划</a></li>
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-download.action" target="_blank">目标下载</a></li>
-                <li><a href="<%=request.getContextPath()%>/monitor/pgwac-parm-monitor.action" target="_blank">目标查看</a></li>
+                <!--<li><a href="<%=request.getContextPath()%>/monitor/pgwac-parm-monitor.action" target="_blank">目标查看</a></li>-->
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-mot-timesequence-sphere-debug.action" target="_blank">目标3D展示</a></li>
                 <li><a href="<%=request.getContextPath()%>/gwac/pgwac-ccd-image-realtime.action" target="_blank">图像预览</a></li>
                 <li><a href="<%=request.getContextPath()%>/monitor/monitor-mag.action" target="_blank">夜天光</a></li>
@@ -160,7 +160,7 @@
                 console.log("server error");
               }
               function onDataReceived(result) {
-                console.log(result);
+                //console.log(result);
                 cameras = result.cameras;
                 domes = result.domes;
                 mounts = result.mounts;
@@ -180,8 +180,8 @@
                 }
                 $('#yuntuTime').html(systemParameter.latestClouldImageTime.replace("T", " "));
                 var yuntuUrl = "/images/" + systemParameter.clouldImagePath + "/" + systemParameter.latestClouldImage + "?timestamp=" + new Date().getTime();
-//                $('#yuntuImg').attr("src", yuntuUrl);
-//                $('#yuntuA').attr("href", yuntuUrl);
+                $('#yuntuImg').attr("src", yuntuUrl);
+                $('#yuntuA').attr("href", yuntuUrl);
 
 
                 $.each(mounts, function (i, mount) {

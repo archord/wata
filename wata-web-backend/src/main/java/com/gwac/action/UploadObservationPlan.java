@@ -29,6 +29,20 @@ import org.apache.struts2.convention.annotation.Action;
  */
 public class UploadObservationPlan extends ActionSupport {
 
+  /**
+   * @param gId the gId to set
+   */
+  public void setGid(String gId) {
+    this.gId = gId;
+  }
+
+  /**
+   * @param uId the uId to set
+   */
+  public void setUid(String uId) {
+    this.uId = uId;
+  }
+
   private static final Log log = LogFactory.getLog(UploadObservationPlan.class);
 //  private static final String dateFormateString1 = "yyyy-MM-dd HH:mm:ss.SSS";
 //  private static final String dateFormateString2 = "yyyy-MM-dd HH:mm:ss";
@@ -41,8 +55,8 @@ public class UploadObservationPlan extends ActionSupport {
   private String opSn;
   private String opTime;
   private String opType;
-  private String groupId;
-  private String unitId;
+  private String gId;
+  private String uId;
   private String obsType;
   private String gridId;
   private String fieldId;
@@ -109,13 +123,13 @@ public class UploadObservationPlan extends ActionSupport {
     }
     obsPlan.setFieldId(fieldId);
     obsPlan.setGridId(gridId);
-    obsPlan.setGroupId(groupId);
+    obsPlan.setGroupId(gId);
     obsPlan.setImgType(imgType);
     obsPlan.setObjError(objError);
     obsPlan.setObjId(objId);
     obsPlan.setObsType(obsType.trim());
     obsPlan.setOpType(opType); //???
-    obsPlan.setUnitId(unitId);
+    obsPlan.setUnitId(uId);
 
     if (null != beginTime && !beginTime.isEmpty()) {
       beginTime = beginTime.trim().replace("T", " ");
@@ -193,9 +207,9 @@ public class UploadObservationPlan extends ActionSupport {
     sb.append(",opType=");
     sb.append(opType);
     sb.append(",groupId=");
-    sb.append(groupId);
+    sb.append(gId);
     sb.append(",unitId=");
-    sb.append(unitId);
+    sb.append(uId);
     sb.append(",obsType=");
     sb.append(obsType);
     sb.append(",gridId=");
@@ -269,21 +283,7 @@ public class UploadObservationPlan extends ActionSupport {
   public void setOpType(String opType) {
     this.opType = opType;
   }
-
-  /**
-   * @param groupId the groupId to set
-   */
-  public void setGroupId(String groupId) {
-    this.groupId = groupId;
-  }
-
-  /**
-   * @param unitId the unitId to set
-   */
-  public void setUnitId(String unitId) {
-    this.unitId = unitId;
-  }
-
+  
   /**
    * @param obsType the obsType to set
    */

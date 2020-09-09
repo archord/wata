@@ -37,7 +37,7 @@ public class UploadObservationPlanState extends ActionSupport {
   @Resource
   private ObservationPlanDao obsPlanDao;
 
-  private String opId;
+  private String opSn;
   private String state;
   private String ctime;
   private String echo = "";
@@ -47,9 +47,9 @@ public class UploadObservationPlanState extends ActionSupport {
 
     echo = "";
 
-    if (null != opId && !opId.isEmpty()) {
+    if (null != opSn && !opSn.isEmpty()) {
       ObservationPlanState obsPlanState = new ObservationPlanState();
-      obsPlanState.setOpId(Long.parseLong(opId));
+      obsPlanState.setOpId(Long.parseLong(opSn));
       obsPlanState.setState(state);
       if (null != ctime) {
 	obsPlanState.setCtime(CommonFunction.stringToDate(ctime.replace("T", " "), dateFormateString2));
@@ -78,13 +78,6 @@ public class UploadObservationPlanState extends ActionSupport {
   }
 
   /**
-   * @param opId the opId to set
-   */
-  public void setOpId(String opId) {
-    this.opId = opId;
-  }
-
-  /**
    * @param state the state to set
    */
   public void setState(String state) {
@@ -96,6 +89,13 @@ public class UploadObservationPlanState extends ActionSupport {
    */
   public void setCtime(String ctime) {
     this.ctime = ctime;
+  }
+
+  /**
+   * @param opSn the opSn to set
+   */
+  public void setOpSn(String opSn) {
+    this.opSn = opSn;
   }
 
 }

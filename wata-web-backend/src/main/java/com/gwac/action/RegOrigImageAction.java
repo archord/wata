@@ -157,21 +157,21 @@ public class RegOrigImageAction extends ActionSupport implements ApplicationAwar
   /**
    * @param groupId the groupId to set
    */
-  public void setGroupId(String groupId) {
+  public void setGid(String groupId) {
     this.groupId = groupId;
   }
 
   /**
    * @param unitId the unitId to set
    */
-  public void setUnitId(String unitId) {
+  public void setUid(String unitId) {
     this.unitId = unitId;
   }
 
   /**
    * @param camId the camId to set
    */
-  public void setCamId(String camId) {
+  public void setCid(String camId) {
     this.camId = camId;
   }
 
